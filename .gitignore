@@ -26,3 +26,17 @@
 *.exe
 *.out
 *.app
+
+tests/
+*.swp
+*.swo
+*.in
+*.out
+1/bin
+2/bin
+3/bin
+4/bin
+5/bin
+6/bin
+*.swp
+
