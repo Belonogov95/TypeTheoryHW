@@ -30,7 +30,6 @@ void solve() {
     LambdaParser parser(s);
     Node * head = parser.parseExp();
     string ans = genAns(head);
-    db(ans);
     cout << ans << endl;
 }
 
