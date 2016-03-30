@@ -1,46 +1,19 @@
-#include "main.h"
-#include "lambdaParser.h"
-
-string s;
-
-void read() {
-    getline(cin, s);
-}
+#include "../LambdaParser/main.h"
+#include "../LambdaParser/lambdaParser.h"
 
 
-
-string genAns(Node * v) {
-    if (v->ch.empty()) {
-        assert(isalpha(v->type[0]));
-        return v->type;
-    }
-    if (v->type == "APPLY") {
-        auto r1 = genAns(v->ch[0]);
-        auto r2 = genAns(v->ch[1]);
-        return "(" + r1 + " " + r2 + ")";
-    }
-    assert(v->type == "EXP");
-    if (v->ch.size() == 1) return genAns(v->ch[0]);
-    if (v->ch.size() == 2) return "(\\" + genAns(v->ch[0]) + "." + genAns(v->ch[1]) + ")";
-    if (v->ch.size() == 3) return "(" + genAns(v->ch[0]) + "(\\" + genAns(v->ch[1]) + "." + genAns(v->ch[2]) + "))";
-    assert(false);
-}
 
 void solve() {
-    LambdaParser parser(s);
-    Node * head = parser.parseExp();
-    string ans = genAns(head);
-    cout << ans << endl;
+    string s;
+    getline(cin, s);
+    cout << genAns(parse(s)) << endl;
 }
-
 
 int main() {
     freopen("task1.in", "r", stdin);
     //freopen("task1.out", "w", stdout);
 
-    read();
     solve();
-
 
     return 0;
 }

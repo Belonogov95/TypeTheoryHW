@@ -3,13 +3,13 @@
 CXXFLAGS= -std=c++11 -Wno-unused-result -D_GLIBCXX_DEBUG -fsanitize=address
 #CXXFLAGS= -std=c++11 
 HWID=3
-
+path=../LambdaParser/
 all: $(HWID)
 
-ordinalParser.o: lambdaParser.cpp lambdaParser.h main.h
+ordinalParser.o: $(path)lambdaParser.cpp $(path)lambdaParser.h $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
-$(HWID).o: $(HWID).cpp main.h
+$(HWID).o: $(HWID).cpp $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
 $(HWID): $(HWID).o lambdaParser.o 

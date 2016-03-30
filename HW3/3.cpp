@@ -1,5 +1,5 @@
-#include "main.h"
-#include "lambdaParser.h"
+#include "../LambdaParser/main.h"
+#include "../LambdaParser/lambdaParser.h"
 
 
 
