@@ -12,12 +12,31 @@ struct LexicalAnalyzer {
     void next();
     string curToken();
 };
+ull binPow(ull a, int b) ;
+
+struct Hash {
+    int len;
+    ull hash;
+    Hash(string s) {
+        len = s.size();
+        hash = 0;
+        for (auto ch: s)
+            hash = hash * P + ch;
+    }
+    Hash(int len, ull hash): len(len), hash(hash) { }
+    Hash():len(0), hash(0) { }
+    Hash operator + (Hash other) {
+        return Hash(len + other.len, hash * binPow(P, other.len) + other.hash);  
+    }
+};
 
 struct Node {
     string type;
     Node * l, * r;
+    Hash hash;
     Node (string type);
     Node (string type, Node * l, Node * r);
+    ull getHash();
 };
 
 struct LambdaParser {
@@ -47,6 +66,8 @@ struct FreeVarGenerator {
 };
 
 //set < string > genFV(Node * v);
+
+Node * createCopy(Node * v);
 
 bool checkFV(Node * v, string var);
 

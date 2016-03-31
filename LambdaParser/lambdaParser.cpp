@@ -13,6 +13,17 @@ bool myCheck(char ch) {
     return 0;
 }
 
+
+ull binPow(ull a, int b) {
+    ull res = 1;
+    for (; b > 0; b /= 2) {
+        if (b % 2 == 1) 
+            res = res * a;
+        a = a * a;
+    }
+    return res;
+}
+
 void LexicalAnalyzer::next() {
     for (; cur < (int)s.size() && isspace(s[cur]); cur++);
 
@@ -39,9 +50,29 @@ void LexicalAnalyzer::next() {
 }
 
 
-Node :: Node (string type): type(type), l(NULL), r(NULL) { }
+Node :: Node (string type): type(type), l(NULL), r(NULL), hash(type) {
+}
 
-Node :: Node (string type, Node * l, Node * r): type(type), l(l), r(r) { }
+    //if (v->type == "APPLY") return "(" + genAns(v->l) + " " + genAns(v->r) + ")";
+    //if (v->type == "ABSTR") return "(\\" + genAns(v->l) + "." + genAns(v->r) + ")";
+
+Node :: Node (string type, Node * l, Node * r): type(type), l(l), r(r) { 
+    if (type == "APPLY") {
+        hash = Hash("(") + l->hash + Hash(" ") + r->hash + Hash(")");
+        return;
+    }
+    if (type == "ABSTR") {
+        hash = Hash("(\\") + l->hash + Hash(".") + r->hash + Hash(")");
+        return;
+    } 
+    if (type == "COND") 
+        return;
+    assert(false);
+}
+
+ull Node::getHash() {
+    return hash.hash;
+}
 
 string LexicalAnalyzer::curToken() {
     return token;
@@ -71,6 +102,7 @@ Node * LambdaParser::parseExp() {
     }
     return g;
 }
+
 
 Node * LambdaParser::parseApply() {
     Node * v = parseAtom();
@@ -150,6 +182,7 @@ bool checkFV(Node * v, string var) {
 }
 
 int cntN = 0;
+
 Node * createCopy(Node * v) {
     Node * vv = new Node(v->type);
     cntN++;
@@ -181,14 +214,15 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & 
 
         assert(islower(v->l->type[0]));
         string y = v->l->type;
-        //if (fvU.count(y) == 1) {
-        //if (checkFV(u, y)) {
-        if (false) {
+        if (checkFV(u, y)) {
             //assert(false);
             string z = gen.next();
             v->l->type = z;
             int cc = 0;
+            //Node * gg;
             v->r = makeSubst(v->r, y, new Node(z), cc, gen);
+            //delete gg;
+            //delete gg;
             v->r = makeSubst(v->r, name, u, cnt, gen);
         }
         else 

@@ -1,6 +1,6 @@
 
 
-#CXXFLAGS= -std=c++11 -Wno-unused-result -D_GLIBCXX_DEBUG -fsanitize=address -Wall
+#CXXFLAGS= -std=c++11 -Wno-unused-result -D_GLIBCXX_DEBUG -Wall
 CXXFLAGS= -std=c++11 -O3 -Wno-unused-result -Wall
 #CXXFLAGS= -std=c++11 -pg -Wno-unused_resultt
 HWID=4

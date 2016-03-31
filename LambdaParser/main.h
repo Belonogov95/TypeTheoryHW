@@ -1,3 +1,6 @@
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -28,4 +31,8 @@ using namespace std;
 #define equal equalll
 #define less lesss
 typedef string Token;
+typedef unsigned long long ull;
+const int P = 997;
+
+#endif
 
