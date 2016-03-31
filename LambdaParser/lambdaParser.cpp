@@ -53,10 +53,15 @@ void LexicalAnalyzer::next() {
 Node :: Node (string type): type(type), l(NULL), r(NULL), hash(type) {
 }
 
-    //if (v->type == "APPLY") return "(" + genAns(v->l) + " " + genAns(v->r) + ")";
-    //if (v->type == "ABSTR") return "(\\" + genAns(v->l) + "." + genAns(v->r) + ")";
-
 Node :: Node (string type, Node * l, Node * r): type(type), l(l), r(r) { 
+    updateHash();
+}
+
+ull Node::getHash() {
+    return hash.hash;
+}
+
+void Node::updateHash() {
     if (type == "APPLY") {
         hash = Hash("(") + l->hash + Hash(" ") + r->hash + Hash(")");
         return;
@@ -70,8 +75,18 @@ Node :: Node (string type, Node * l, Node * r): type(type), l(l), r(r) {
     assert(false);
 }
 
-ull Node::getHash() {
-    return hash.hash;
+Node * Node::getL() { return l; }
+
+Node * Node::getR() { return r; } 
+
+void Node::setL(Node * v) {
+    l = v;
+    updateHash();
+}
+
+void Node::setR(Node * v) {
+    r = v;
+    updateHash();
 }
 
 string LexicalAnalyzer::curToken() {
@@ -155,14 +170,14 @@ Node * LambdaParser::parseCondition() {
         //return q;
     //}
     //if (v->type == "APPLY") {
-        //auto r1 = genFV(v->l);
-        //auto r2 = genFV(v->r);
+        //auto r1 = genFV(v->getL());
+        //auto r2 = genFV(v->getR());
         //r1.insert(r2.begin(), r2.end());
         //return r1;
     //}
     //if (v->type == "ABSTR") {
-        //auto r = genFV(v->r); 
-        //r.erase(v->l->type);
+        //auto r = genFV(v->getR()); 
+        //r.erase(v->getL()->type);
         //return r;
     //}
     //assert(false);
@@ -172,11 +187,11 @@ bool checkFV(Node * v, string var) {
     if (islower(v->type[0]))
         return v->type == var;
     if (v->type == "APPLY") {
-        return checkFV(v->l, var) || checkFV(v->r, var);
+        return checkFV(v->getL(), var) || checkFV(v->getR(), var);
     }
     if (v->type == "ABSTR") {
-        if (v->l->type == var) return 0;
-        return checkFV(v->r, var);
+        if (v->getL()->type == var) return 0;
+        return checkFV(v->getR(), var);
     }
     assert(false);
 }
@@ -184,49 +199,58 @@ bool checkFV(Node * v, string var) {
 int cntN = 0;
 
 Node * createCopy(Node * v) {
-    Node * vv = new Node(v->type);
+    //db("11");
     cntN++;
-    if (cntN % 500000 == 0)
-        db(cntN);
-    if (v->l != NULL) vv->l = createCopy(v->l);
-    if (v->r != NULL) vv->r = createCopy(v->r);
-    return vv;
+    if (islower(v->type[0]))  
+        return new Node(v->type);
+    //if (cntN % 500000 == 0)
+        //db(cntN);
+    return new Node(v->type, createCopy(v->getL()), createCopy(v->getR()));
+}
+
+void checkEqual(Node * v, Node * u) {
+    assert(v != NULL && u != NULL);
+    assert(v->type == u->type);
+    if (v->getL() != NULL) checkEqual(v->getL(), u->getL());
+    if (v->getL() != NULL) checkEqual(v->getR(), u->getR());
+
 }
 
 Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen) {
     if (islower(v->type[0])) {
         if (v->type == name) {
             cnt++;
-            return createCopy(u);
+            Node * g = createCopy(u);
+            checkEqual(g, u);
+            return g;
         }
         return v;
     }
+    //db(v->type);
     if (v->type == "APPLY") {
-        v->l = makeSubst(v->l, name, u, cnt, gen);
-        v->r = makeSubst(v->r, name, u, cnt, gen);
+        v->setL(makeSubst(v->getL(), name, u, cnt, gen));
+        v->setR(makeSubst(v->getR(), name, u, cnt, gen));
         return v;
     }
     if (v->type == "ABSTR") {
-        if (v->l->type == name)
+        if (v->getL()->type == name)
             return v;
         //auto fvU = genFV(u);
         //bool checkFVy = check
 
-        assert(islower(v->l->type[0]));
-        string y = v->l->type;
+        assert(islower(v->getL()->type[0]));
+        string y = v->getL()->type;
         if (checkFV(u, y)) {
             //assert(false);
             string z = gen.next();
-            v->l->type = z;
+            v->getL()->type = z;
             int cc = 0;
             //Node * gg;
-            v->r = makeSubst(v->r, y, new Node(z), cc, gen);
-            //delete gg;
-            //delete gg;
-            v->r = makeSubst(v->r, name, u, cnt, gen);
+            v->setR(makeSubst(v->getR(), y, new Node(z), cc, gen));
+            v->setR(makeSubst(v->getR(), name, u, cnt, gen));
         }
-        else 
-            v->r = makeSubst(v->r, name, u, cnt, gen);
+        else  
+            v->setR(makeSubst(v->getR(), name, u, cnt, gen));
         return v;
     }
     assert(false);
@@ -235,8 +259,8 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & 
 string genAns(Node * v) {
     if (islower(v->type[0]))
         return v->type;
-    if (v->type == "APPLY") return "(" + genAns(v->l) + " " + genAns(v->r) + ")";
-    if (v->type == "ABSTR") return "(\\" + genAns(v->l) + "." + genAns(v->r) + ")";
+    if (v->type == "APPLY") return "(" + genAns(v->getL()) + " " + genAns(v->getR()) + ")";
+    if (v->type == "ABSTR") return "(\\" + genAns(v->getL()) + "." + genAns(v->getR()) + ")";
     assert(false);
 }
 
@@ -250,8 +274,8 @@ void FreeVarGenerator::add(Node * v) {
     if (islower(v->type[0])) 
         add(v->type);
     else {
-        add(v->l);
-        add(v->r);
+        add(v->getL());
+        add(v->getR());
     }
 }
 
@@ -308,17 +332,5 @@ Node * parse(string s) {
     LambdaParser parser(s);
     return parser.parseExp();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -15,13 +15,14 @@ map < ull, Node * > g;
 //}
 
 Node * makeBRed(Node * v) {
+    //db(v->type);
     if (islower(v->type[0])) return v;
     if (v->type == "ABSTR") {
-        v->r = makeBRed(v->r);
+        v->setR(makeBRed(v->getR()));
         return v;
     }
     if (v->type == "APPLY") {
-        if (v->l->type == "ABSTR") {
+        if (v->getL()->type == "ABSTR") {
             vector < ull > forUpdate;
             for (;;) {
                 if (g.count(v->getHash()) == 1) {
@@ -42,15 +43,21 @@ Node * makeBRed(Node * v) {
 
             int cnt = 0;
             ull oldHash = v->getHash();
-            v = makeSubst(v->l->r, v->l->l->type, v->r, cnt, gen);
+            v = makeSubst(v->getL()->getR(), v->getL()->getL()->type, v->getR(), cnt, gen);
             Node * tmp = createCopy(v);
             g[oldHash] = tmp;
             flag = 1;
             return v;
         }
-        v->l = makeBRed(v->l);
-        if (flag) return v;
-        v->r = makeBRed(v->r);
+        ull oldHash = v->getHash();
+        v->setL(makeBRed(v->getL()));
+        if (!flag) {
+            v->setR(makeBRed(v->getR()));
+        }
+        if (flag) {
+            g[oldHash] = createCopy(v);
+        }
+
         return v;
     }
     assert(false);
@@ -62,22 +69,25 @@ void solve() {
     getline(cin, s); 
         
     Node * head = parse(s);
-    //db2(getHash(genAns(head)), head->hash.hash);
     //exit(0);
     gen.add(head);
 
-    for (int it = 0; it < 30 ; it++) {
-        db(it);
-            //db(clock() * 1.0 / CLOCKS_PER_SEC);
-            //db(it);
-            //db(genAns(head).size());
-            ////db(genAns(head));
-            //db(gen.cur);
+    for (int it = 0; ; it++) {
+        db2(it, g.size());
+        if (it % 1000 == 0) {
+            db2(it, g.size());
+        }
         flag = 0;
         head = makeBRed(head);
-        cerr << genAns(head) << endl;
         if (!flag) {
             db(it);
+            string tmp = genAns(head);
+            Node * tt = parse(tmp);
+            //db(genAns(tt));
+            flag = 0;
+            makeBRed(tt);
+            assert(!flag);
+            db("OK");
             break;
         }
     }

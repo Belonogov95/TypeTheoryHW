@@ -3,7 +3,6 @@
 #ifndef LABMDA_PARSER
 #define LABMDA_PARSER
    
-
 struct LexicalAnalyzer {
     string s;
     string token;
@@ -32,11 +31,21 @@ struct Hash {
 
 struct Node {
     string type;
+private:
     Node * l, * r;
     Hash hash;
+public:
     Node (string type);
     Node (string type, Node * l, Node * r);
+
+private:
+    void updateHash();
+public:
     ull getHash();
+    Node * getL();
+    Node * getR();
+    void setL(Node * v);
+    void setR(Node * v);
 };
 
 struct LambdaParser {
