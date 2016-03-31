@@ -2,62 +2,59 @@
 #include "../LambdaParser/lambdaParser.h"
 
 
-bool flag;
+int cnt;
 FreeVarGenerator gen;
 
-map < ull, Node * > g;
+map < ull, pair < Node *, int > > g;
 
-//ull getHash(string s) {
-    //ull res = 0;
-    //for (auto ch: s)
-        //res = res * P + ch;
-    //return res;
-//}
+const int MAX_LEN = 100;
 
 Node * makeBRed(Node * v) {
-    //db(v->type);
     if (islower(v->type[0])) return v;
     if (v->type == "ABSTR") {
+        //ull oldHash = v->getHash();
         v->setR(makeBRed(v->getR()));
+        //if (cnt > 0 && v->getLen() < MAX_LEN) {
+            //g[oldHash] = mp(createCopy(v), cnt);
+        //}
         return v;
     }
     if (v->type == "APPLY") {
         if (v->getL()->type == "ABSTR") {
-            vector < ull > forUpdate;
+            vector < pair < ull, int > > forUpdate;
             for (;;) {
                 if (g.count(v->getHash()) == 1) {
-                    flag = 1; 
-                    forUpdate.pb(v->getHash());
-                    v = g[v->getHash()];
+                    forUpdate.pb(mp(v->getHash(), cnt));
+                    cnt += g[v->getHash()].sc;
+                    v = g[v->getHash()].fr;
                 }
                 else
                     break;
             }
             for (auto x: forUpdate) {
-                g[x] = v;
+                assert(cnt > x.sc);
+                g[x.fr] = mp(v, cnt - x.sc);
             } 
-            if (flag) {
+            if (cnt > 0) {
                 v = createCopy(v);
                 return v;
             }
 
-            int cnt = 0;
+            int cc = 0;
             ull oldHash = v->getHash();
-            v = makeSubst(v->getL()->getR(), v->getL()->getL()->type, v->getR(), cnt, gen);
-            Node * tmp = createCopy(v);
-            g[oldHash] = tmp;
-            flag = 1;
+            v = makeSubst(v->getL()->getR(), v->getL()->getL()->type, v->getR(), cc, gen);
+            g[oldHash] = mp(createCopy(v), 1);
+            cnt = 1;
             return v;
         }
         ull oldHash = v->getHash();
         v->setL(makeBRed(v->getL()));
-        if (!flag) {
+        if (cnt == 0) {
             v->setR(makeBRed(v->getR()));
         }
-        if (flag) {
-            g[oldHash] = createCopy(v);
+        if (cnt > 0 && v->getLen() < MAX_LEN) {
+            g[oldHash] = mp(createCopy(v), cnt);
         }
-
         return v;
     }
     assert(false);
@@ -73,20 +70,23 @@ void solve() {
     gen.add(head);
 
     for (int it = 0; ; it++) {
-        db2(it, g.size());
-        if (it % 1000 == 0) {
-            db2(it, g.size());
-        }
-        flag = 0;
+        
+        //if (it % 10 == 0) {
+            //db2(it, g.size());
+            //db(genAns(head).size());
+        //}
+        cnt = 0;
         head = makeBRed(head);
-        if (!flag) {
-            db(it);
+        if (cnt > 1)
+            db2(it, cnt);
+        if (cnt == 0) {
+            db2(it, g.size());
             string tmp = genAns(head);
             Node * tt = parse(tmp);
             //db(genAns(tt));
-            flag = 0;
+            cnt = 0;
             makeBRed(tt);
-            assert(!flag);
+            assert(cnt == 0);
             db("OK");
             break;
         }

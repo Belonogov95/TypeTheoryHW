@@ -61,6 +61,10 @@ ull Node::getHash() {
     return hash.hash;
 }
 
+int Node::getLen() {
+    return hash.len;
+}
+
 void Node::updateHash() {
     if (type == "APPLY") {
         hash = Hash("(") + l->hash + Hash(" ") + r->hash + Hash(")");
@@ -199,12 +203,11 @@ bool checkFV(Node * v, string var) {
 int cntN = 0;
 
 Node * createCopy(Node * v) {
-    //db("11");
     cntN++;
+    if (cntN % 500000 == 0)
+        db(cntN);
     if (islower(v->type[0]))  
         return new Node(v->type);
-    //if (cntN % 500000 == 0)
-        //db(cntN);
     return new Node(v->type, createCopy(v->getL()), createCopy(v->getR()));
 }
 
@@ -220,9 +223,7 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & 
     if (islower(v->type[0])) {
         if (v->type == name) {
             cnt++;
-            Node * g = createCopy(u);
-            checkEqual(g, u);
-            return g;
+            return createCopy(u);
         }
         return v;
     }

@@ -42,6 +42,7 @@ private:
     void updateHash();
 public:
     ull getHash();
+    int getLen();
     Node * getL();
     Node * getR();
     void setL(Node * v);
