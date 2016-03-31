@@ -48,7 +48,7 @@ struct FreeVarGenerator {
 
 set < string > genFV(Node * v);
 
-Node * makeSubst(Node * v, string name, Node * u, int & cnt);
+Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen);
 
 string genAns(Node * v);
 

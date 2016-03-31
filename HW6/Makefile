@@ -2,18 +2,18 @@
 
 CXXFLAGS= -std=c++11 -Wno-unused-result -D_GLIBCXX_DEBUG -fsanitize=address
 #CXXFLAGS= -std=c++11 
-HWID=5
-
+HWID=6
+path=../LambdaParser/
 all: $(HWID)
 
-termParser.o: termParser.cpp termParser.h main.h
+ordinalParser.o: $(path)lambdaParser.cpp $(path)lambdaParser.h $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
-$(HWID).o: $(HWID).cpp main.h
+$(HWID).o: $(HWID).cpp $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
-$(HWID): $(HWID).o termParser.o 
-	g++ $(CXXFLAGS) -o bin/$(HWID) $(HWID).o termParser.o
+$(HWID): $(HWID).o lambdaParser.o 
+	g++ $(CXXFLAGS) -o bin/$(HWID) $(HWID).o lambdaParser.o
 
 clean:
 	rm -f *.o 

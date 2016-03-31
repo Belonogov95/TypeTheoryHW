@@ -6,7 +6,7 @@ HWID=3
 path=../LambdaParser/
 all: $(HWID)
 
-ordinalParser.o: $(path)lambdaParser.cpp $(path)lambdaParser.h $(path)main.h
+lambdaParser.o: $(path)lambdaParser.cpp $(path)lambdaParser.h $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
 $(HWID).o: $(HWID).cpp $(path)main.h

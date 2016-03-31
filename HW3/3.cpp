@@ -13,9 +13,13 @@ void solve() {
 
     string name = head->r->l->type;
     Node * u = head->r->r;
-    
+
     int cnt = 0;
-    Node * ans = makeSubst(v, name, u, cnt);
+    FreeVarGenerator gen;
+    gen.add(v);
+    gen.add(name);
+    gen.add(u);
+    Node * ans = makeSubst(v, name, u, cnt, gen);
     if (cnt > 0) 
         cout << genAns(ans) << endl;
     else {

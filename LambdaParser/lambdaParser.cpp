@@ -136,7 +136,7 @@ set < string > genFV(Node * v) {
     assert(false);
 }
 
-Node * makeSubst(Node * v, string name, Node * u, int & cnt) {
+Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen) {
     if (islower(v->type[0])) {
         if (v->type == name) {
             cnt++;
@@ -145,14 +145,31 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt) {
         return v;
     }
     if (v->type == "APPLY") {
-        v->l = makeSubst(v->l, name, u, cnt);
-        v->r = makeSubst(v->r, name, u, cnt);
+        v->l = makeSubst(v->l, name, u, cnt, gen);
+        v->r = makeSubst(v->r, name, u, cnt, gen);
         return v;
     }
     if (v->type == "ABSTR") {
         if (v->l->type == name)
             return v;
-        v->r = makeSubst(v->r, name, u, cnt);
+        auto fvU = genFV(u);
+        db("FVU");
+        for (auto x: fvU)
+            cerr << x << " ";
+        cerr << endl;
+        db(name);
+
+        assert(islower(v->l->type[0]));
+        string y = v->l->type;
+        if (fvU.count(y) == 1) {
+            string z = gen.next();
+            v->l->type = z;
+            int cc = 0;
+            v->r = makeSubst(v->r, y, new Node(z), cc, gen);
+            v->r = makeSubst(v->r, name, u, cnt, gen);
+        }
+        else 
+            v->r = makeSubst(v->r, name, u, cnt, gen);
         return v;
     }
     assert(false);
@@ -161,12 +178,10 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt) {
 string genAns(Node * v) {
     if (islower(v->type[0]))
         return v->type;
-
     if (v->type == "APPLY") return "(" + genAns(v->l) + " " + genAns(v->r) + ")";
     if (v->type == "ABSTR") return "(\\" + genAns(v->l) + "." + genAns(v->r) + ")";
     assert(false);
 }
-
 
 
 const int BASE = 37;
