@@ -84,7 +84,7 @@ void add(TNode * v, TNode * u) {
     g[id] = u;
 }
 
-int rec(Node * v) {
+int rec(shared_ptr < Node > v) {
     if (islower(v->type[0])) {
         int id;
         if (varId.count(v->type) == 0) 
@@ -120,7 +120,7 @@ string f(int id) {
 void solve() {
     string s;
     getline(cin, s);
-    Node * head = parse(s);
+    shared_ptr < Node > head = parse(s);
 
     int id = rec(head);
 

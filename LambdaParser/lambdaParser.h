@@ -43,6 +43,7 @@ struct Node {
     const shared_ptr < Node > l, r;
     int h;
     Hash hash;
+    set < string > freeCh;
     Node (string type);
     Node (string type, shared_ptr < Node > l, shared_ptr < Node > r);
     ~Node();
@@ -54,7 +55,11 @@ public:
     int getLen();
     shared_ptr < Node > getL();
     shared_ptr < Node > getR();
+    bool isVar();
+    bool isAbstr();
+    bool isApply();
 };
+
 
 struct LambdaParser {
     LexicalAnalyzer lex;
@@ -82,7 +87,7 @@ struct FreeVarGenerator {
     
 };
 
-//set < string > genFV(shared_ptr < Node > v);
+set < string > genFV(shared_ptr < Node > v);
 
 //shared_ptr < Node > createCopy(shared_ptr < Node > v);
 

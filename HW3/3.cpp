@@ -7,19 +7,19 @@ void solve() {
     string s;
     getline(cin, s);
     LambdaParser parser(s);
-    Node * head = parser.parseCondition();
+    shared_ptr < Node > head = parser.parseCondition();
 
-    Node * v = head->l;
+    shared_ptr < Node > v = head->l;
 
     string name = head->r->l->type;
-    Node * u = head->r->r;
+    shared_ptr < Node > u = head->r->r;
 
     int cnt = 0;
     FreeVarGenerator gen;
     gen.add(v);
     gen.add(name);
     gen.add(u);
-    Node * ans = makeSubst(v, name, u, cnt, gen);
+    shared_ptr < Node > ans = makeSubst(v, name, u, cnt, gen);
     if (cnt > 0) 
         cout << genAns(ans) << endl;
     else {

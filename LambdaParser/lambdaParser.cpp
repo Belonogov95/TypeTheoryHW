@@ -53,15 +53,37 @@ int cntCon2;
 int cntDest;
 
 Node :: Node (string type): type(type), l(NULL), r(NULL), h(0), hash(type) {
+    freeCh.insert(type);
     cntCon1++;
 }
 
 Node :: Node (string type, shared_ptr < Node > l, shared_ptr < Node > r): type(type), l(l), r(r) { 
     updateHash();
+    if (isApply()) {
+        freeCh = l->freeCh;
+        freeCh.insert(r->freeCh.begin(), r->freeCh.end());
+    }
+    else {
+        freeCh = r->freeCh;
+        freeCh.erase(l->type);
+    }
+    assert(freeCh.size() < 20);
     cntCon2++;
 }
 Node :: ~Node() {
     cntDest++;
+}
+
+bool Node::isVar() {
+    return islower(type[0]);         
+}
+
+bool Node::isAbstr() {
+    return type == "ABSTR";
+}
+
+bool Node::isApply() {
+    return type == "APPLY";
 }
 
 ull Node::getHash() {
@@ -178,38 +200,38 @@ shared_ptr < Node > LambdaParser::parseCondition() {
 
 
 // tools
-//set < string > genFV(shared_ptr < Node > v) {
-    //if (islower(v->type[0])) {
-        //set < string > q;
-        //q.insert(v->type);
-        //return q;
-    //}
-    //if (v->type == "APPLY") {
-        //auto r1 = genFV(v->getL());
-        //auto r2 = genFV(v->getR());
-        //r1.insert(r2.begin(), r2.end());
-        //return r1;
-    //}
-    //if (v->type == "ABSTR") {
-        //auto r = genFV(v->getR()); 
-        //r.erase(v->getL()->type);
-        //return r;
-    //}
-    //assert(false);
-//}
-
-bool checkFV(shared_ptr < Node > v, string var) {
-    if (islower(v->type[0]))
-        return v->type == var;
+set < string > genFV(shared_ptr < Node > v) {
+    if (islower(v->type[0])) {
+        set < string > q;
+        q.insert(v->type);
+        return q;
+    }
     if (v->type == "APPLY") {
-        return checkFV(v->getL(), var) || checkFV(v->getR(), var);
+        auto r1 = genFV(v->getL());
+        auto r2 = genFV(v->getR());
+        r1.insert(r2.begin(), r2.end());
+        return r1;
     }
     if (v->type == "ABSTR") {
-        if (v->getL()->type == var) return 0;
-        return checkFV(v->getR(), var);
+        auto r = genFV(v->getR()); 
+        r.erase(v->getL()->type);
+        return r;
     }
     assert(false);
 }
+
+//bool checkFV(shared_ptr < Node > v, string var) {
+    //if (islower(v->type[0]))
+        //return v->type == var;
+    //if (v->type == "APPLY") {
+        //return checkFV(v->getL(), var) || checkFV(v->getR(), var);
+    //}
+    //if (v->type == "ABSTR") {
+        //if (v->getL()->type == var) return 0;
+        //return checkFV(v->getR(), var);
+    //}
+    //assert(false);
+//}
 
 int cntN = 0;
 
@@ -230,12 +252,12 @@ void checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
 
 }
 
-int cntSub;
+//int cntSub;
 
 shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < Node > u, int & cnt, FreeVarGenerator & gen) {
-    cntSub++;
-    if (cntSub % 1000000 == 0)
-        db(cntSub);
+    //cntSub++;
+    //if (cntSub % 1000000 == 0)
+        //db(cntSub);
 
     if (islower(v->type[0])) {
         if (v->type == name) {
@@ -265,8 +287,9 @@ shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < N
         }
         assert(islower(v->getL()->type[0]));
         string y = v->getL()->type;
-        if (checkFV(u, y)) {
+        //if (checkFV(u, y)) {
         //if (false) {
+        if (u->freeCh.count(y) == 1) {
             //assert(false);
             string z = gen.next();
             //v->getL()->type = z;
@@ -338,7 +361,9 @@ int FreeVarGenerator::decode(string s) {
 string FreeVarGenerator::next() {
     for (; q.count(cur) == 1; cur++);
     q.insert(cur);
-    return code(cur);
+    string s = code(cur);
+    //db(s);
+    return s;
 }
 
 shared_ptr < Node > parse(string s) {

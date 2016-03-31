@@ -4,6 +4,7 @@
 void solve() {
     string s;
     getline(cin, s);
+
     auto q = genFV(parse(s));
     for (auto s: q)
         cout << s << endl;
