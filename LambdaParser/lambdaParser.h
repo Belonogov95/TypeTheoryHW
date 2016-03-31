@@ -46,7 +46,9 @@ struct FreeVarGenerator {
     
 };
 
-set < string > genFV(Node * v);
+//set < string > genFV(Node * v);
+
+bool checkFV(Node * v, string var);
 
 Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen);
 

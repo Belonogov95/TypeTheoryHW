@@ -116,31 +116,55 @@ Node * LambdaParser::parseCondition() {
 
 
 // tools
-set < string > genFV(Node * v) {
-    if (islower(v->type[0])) {
-        set < string > q;
-        q.insert(v->type);
-        return q;
-    }
+//set < string > genFV(Node * v) {
+    //if (islower(v->type[0])) {
+        //set < string > q;
+        //q.insert(v->type);
+        //return q;
+    //}
+    //if (v->type == "APPLY") {
+        //auto r1 = genFV(v->l);
+        //auto r2 = genFV(v->r);
+        //r1.insert(r2.begin(), r2.end());
+        //return r1;
+    //}
+    //if (v->type == "ABSTR") {
+        //auto r = genFV(v->r); 
+        //r.erase(v->l->type);
+        //return r;
+    //}
+    //assert(false);
+//}
+
+bool checkFV(Node * v, string var) {
+    if (islower(v->type[0]))
+        return v->type == var;
     if (v->type == "APPLY") {
-        auto r1 = genFV(v->l);
-        auto r2 = genFV(v->r);
-        r1.insert(r2.begin(), r2.end());
-        return r1;
+        return checkFV(v->l, var) || checkFV(v->r, var);
     }
     if (v->type == "ABSTR") {
-        auto r = genFV(v->r); 
-        r.erase(v->l->type);
-        return r;
+        if (v->l->type == var) return 0;
+        return checkFV(v->r, var);
     }
     assert(false);
+}
+
+int cntN = 0;
+Node * createCopy(Node * v) {
+    Node * vv = new Node(v->type);
+    cntN++;
+    if (cntN % 500000 == 0)
+        db(cntN);
+    if (v->l != NULL) vv->l = createCopy(v->l);
+    if (v->r != NULL) vv->r = createCopy(v->r);
+    return vv;
 }
 
 Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen) {
     if (islower(v->type[0])) {
         if (v->type == name) {
             cnt++;
-            return u;
+            return createCopy(u);
         }
         return v;
     }
@@ -152,16 +176,15 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & 
     if (v->type == "ABSTR") {
         if (v->l->type == name)
             return v;
-        auto fvU = genFV(u);
-        db("FVU");
-        for (auto x: fvU)
-            cerr << x << " ";
-        cerr << endl;
-        db(name);
+        //auto fvU = genFV(u);
+        //bool checkFVy = check
 
         assert(islower(v->l->type[0]));
         string y = v->l->type;
-        if (fvU.count(y) == 1) {
+        //if (fvU.count(y) == 1) {
+        //if (checkFV(u, y)) {
+        if (false) {
+            //assert(false);
             string z = gen.next();
             v->l->type = z;
             int cc = 0;

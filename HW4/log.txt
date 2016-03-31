@@ -1,0 +1,739 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 52.15      0.86     0.86    45092     0.00     0.00  checkFV(Node*, std::string)
+ 22.43      1.23     0.37 56091663     0.00     0.00  __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+ 16.37      1.50     0.27 149509167     0.00     0.00  bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  4.85      1.58     0.08 56091663     0.00     0.00  std::char_traits<char>::compare(char const*, char const*, unsigned long)
+  1.21      1.60     0.02        1     0.02     0.02  _GLOBAL__sub_I__ZN15LexicalAnalyzerC2ESs
+  1.21      1.62     0.02        1     0.02     0.02  _GLOBAL__sub_I_flag
+  0.61      1.63     0.01   168790     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*)
+  0.61      1.64     0.01        1     0.01     0.01  LambdaParser::~LambdaParser()
+  0.61      1.65     0.01                             LambdaParser::parseCondition()
+  0.00      1.65     0.00   891598     0.00     0.00  Node::Node(std::string)
+  0.00      1.65     0.00   337580     0.00     0.00  std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&)
+  0.00      1.65     0.00    84395     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.00      1.65     0.00    84395     0.00     0.00  std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  0.00      1.65     0.00     2445     0.00     0.00  LexicalAnalyzer::curToken()
+  0.00      1.65     0.00      746     0.00     0.00  std::less<int>::operator()(int const&, int const&) const
+  0.00      1.65     0.00      746     0.00     0.00  std::_Identity<int>::operator()(int const&) const
+  0.00      1.65     0.00      727     0.00     0.00  LexicalAnalyzer::next()
+  0.00      1.65     0.00      596     0.00     0.00  std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*)
+  0.00      1.65     0.00      538     0.00     0.00  createCopy(Node*)
+  0.00      1.65     0.00      500     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*)
+  0.00      1.65     0.00      500     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node<int> const*)
+  0.00      1.65     0.00      488     0.00     0.00  myCheck(char)
+  0.00      1.65     0.00      467     0.00     0.00  LambdaParser::parseAtom()
+  0.00      1.65     0.00      368     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_right(std::_Rb_tree_node_base*)
+  0.00      1.65     0.00      300     0.00     0.01  makeBRed(Node*)
+  0.00      1.65     0.00      300     0.00     0.01  makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&)
+  0.00      1.65     0.00      250     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_end()
+  0.00      1.65     0.00      249     0.00     0.00  std::_Identity<int>::operator()(int&) const
+  0.00      1.65     0.00      246     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*)
+  0.00      1.65     0.00      246     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node_base const*)
+  0.00      1.65     0.00      245     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_begin()
+  0.00      1.65     0.00      244     0.00     0.00  LambdaParser::parseVar()
+  0.00      1.65     0.00      244     0.00     0.00  FreeVarGenerator::add(std::string)
+  0.00      1.65     0.00      244     0.00     0.00  FreeVarGenerator::decode(std::string)
+  0.00      1.65     0.00      244     0.00     0.00  std::_Rb_tree_const_iterator<int>::_Rb_tree_const_iterator(std::_Rb_tree_iterator<int> const&)
+  0.00      1.65     0.00      244     0.00     0.00  std::set<int, std::less<int>, std::allocator<int> >::insert(int&&)
+  0.00      1.65     0.00      244     0.00     0.00  std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&)
+  0.00      1.65     0.00      244     0.00     0.00  std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&)
+  0.00      1.65     0.00      244     0.00     0.00  std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&)
+  0.00      1.65     0.00      244     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&)
+  0.00      1.65     0.00      244     0.00     0.00  std::remove_reference<int&>::type&& std::move<int&>(int&)
+  0.00      1.65     0.00      244     0.00     0.00  std::_Rb_tree_iterator<int>& std::forward<std::_Rb_tree_iterator<int>&>(std::remove_reference<std::_Rb_tree_iterator<int>&>::type&)
+  0.00      1.65     0.00      244     0.00     0.00  bool& std::forward<bool&>(std::remove_reference<bool&>::type&)
+  0.00      1.65     0.00      244     0.00     0.00  std::_Rb_tree_iterator<int>&& std::forward<std::_Rb_tree_iterator<int> >(std::remove_reference<std::_Rb_tree_iterator<int> >::type&)
+  0.00      1.65     0.00      244     0.00     0.00  bool&& std::forward<bool>(std::remove_reference<bool>::type&)
+  0.00      1.65     0.00      243     0.00     0.00  Node::Node(std::string, Node*, Node*)
+  0.00      1.65     0.00      238     0.00     0.00  std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node_base*&, void>(std::_Rb_tree_node_base*&, std::_Rb_tree_node_base* const&)
+  0.00      1.65     0.00      238     0.00     0.00  std::_Rb_tree_node_base*& std::forward<std::_Rb_tree_node_base*&>(std::remove_reference<std::_Rb_tree_node_base*&>::type&)
+  0.00      1.65     0.00      233     0.00     0.00  LambdaParser::parseApply()
+  0.00      1.65     0.00      233     0.00     0.00  LambdaParser::parseExp()
+  0.00      1.65     0.00      144     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_left(std::_Rb_tree_node_base*)
+  0.00      1.65     0.00      108     0.00     0.00  std::_Rb_tree_iterator<int>::operator==(std::_Rb_tree_iterator<int> const&) const
+  0.00      1.65     0.00      108     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::begin()
+  0.00      1.65     0.00      105     0.00     0.00  std::_Rb_tree_iterator<int>::operator--()
+  0.00      1.65     0.00       42     0.00     0.00  int&& std::forward<int>(std::remove_reference<int>::type&)
+  0.00      1.65     0.00       12     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_Node_allocator()
+  0.00      1.65     0.00       12     0.00     0.00  std::_Rb_tree_node<int>*& std::forward<std::_Rb_tree_node<int>*&>(std::remove_reference<std::_Rb_tree_node<int>*&>::type&)
+  0.00      1.65     0.00        6     0.00     0.00  __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::deallocate(std::_Rb_tree_node<int>*, unsigned long)
+  0.00      1.65     0.00        6     0.00     0.00  void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::destroy<std::_Rb_tree_node<int> >(std::_Rb_tree_node<int>*)
+  0.00      1.65     0.00        6     0.00     0.00  __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::allocate(unsigned long, void const*)
+  0.00      1.65     0.00        6     0.00     0.00  void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&)
+  0.00      1.65     0.00        6     0.00     0.00  __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::max_size() const
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree_node<int>::_Rb_tree_node<int>(int&&)
+  0.00      1.65     0.00        6     0.00     0.00  _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_
+  0.00      1.65     0.00        6     0.00     0.00  _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_
+  0.00      1.65     0.00        6     0.00     0.00  std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&, void>(std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&)
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&)
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_node()
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_put_node(std::_Rb_tree_node<int>*)
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&)
+  0.00      1.65     0.00        6     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*)
+  0.00      1.65     0.00        6     0.00     0.00  operator new(unsigned long, void*)
+  0.00      1.65     0.00        4     0.00     0.00  genAns(Node*)
+  0.00      1.65     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      1.65     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      1.65     0.00        1     0.00     0.01  parse(std::string)
+  0.00      1.65     0.00        1     0.00     1.60  solve()
+  0.00      1.65     0.00        1     0.00     0.00  LambdaParser::LambdaParser(std::string)
+  0.00      1.65     0.00        1     0.00     0.00  LexicalAnalyzer::LexicalAnalyzer(std::string)
+  0.00      1.65     0.00        1     0.00     0.00  LexicalAnalyzer::~LexicalAnalyzer()
+  0.00      1.65     0.00        1     0.00     0.00  FreeVarGenerator::add(Node*)
+  0.00      1.65     0.00        1     0.00     0.00  FreeVarGenerator::FreeVarGenerator()
+  0.00      1.65     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::new_allocator()
+  0.00      1.65     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::~new_allocator()
+  0.00      1.65     0.00        1     0.00     0.00  std::allocator<std::_Rb_tree_node<int> >::allocator()
+  0.00      1.65     0.00        1     0.00     0.00  std::allocator<std::_Rb_tree_node<int> >::~allocator()
+  0.00      1.65     0.00        1     0.00     0.00  std::set<int, std::less<int>, std::allocator<int> >::set()
+  0.00      1.65     0.00        1     0.00     0.00  std::set<int, std::less<int>, std::allocator<int> >::~set()
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_M_initialize()
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl()
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::~_Rb_tree_impl()
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*)
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree()
+  0.00      1.65     0.00        1     0.00     0.00  std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.61% of 1.65 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     97.0    0.00    1.60                 main [1]
+                0.00    1.60       1/1           solve() [2]
+-----------------------------------------------
+                0.00    1.60       1/1           main [1]
+[2]     97.0    0.00    1.60       1         solve() [2]
+                0.00    1.58     300/300         makeBRed(Node*) [3]
+                0.00    0.01       4/4           genAns(Node*) [12]
+                0.00    0.01       1/1           parse(std::string) [13]
+                0.00    0.00       1/1           FreeVarGenerator::add(Node*) [90]
+-----------------------------------------------
+                                1387             makeBRed(Node*) [3]
+                0.00    1.58     300/300         solve() [2]
+[3]     95.7    0.00    1.58     300+1387    makeBRed(Node*) [3]
+                0.00    1.58     300/300         makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+                0.00    0.00    5061/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                                1387             makeBRed(Node*) [3]
+-----------------------------------------------
+                              106094             makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+                0.00    1.58     300/300         makeBRed(Node*) [3]
+[4]     95.7    0.00    1.58     300+106094  makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+                0.86    0.72   45092/45092       checkFV(Node*, std::string) [5]
+                0.00    0.00   75893/56091663     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [6]
+                0.00    0.00  155331/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00     538/538         createCopy(Node*) [38]
+                              106094             makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+-----------------------------------------------
+                             97184314             checkFV(Node*, std::string) [5]
+                0.86    0.72   45092/45092       makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+[5]     95.7    0.86    0.72   45092+97184314 checkFV(Node*, std::string) [5]
+                0.37    0.08 56015770/56091663     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [6]
+                0.27    0.00 149220380/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                             97184314             checkFV(Node*, std::string) [5]
+-----------------------------------------------
+                0.00    0.00   75893/56091663     makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+                0.37    0.08 56015770/56091663     checkFV(Node*, std::string) [5]
+[6]     27.3    0.37    0.08 56091663         __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [6]
+                0.08    0.00 56091663/56091663     std::char_traits<char>::compare(char const*, char const*, unsigned long) [8]
+-----------------------------------------------
+                0.00    0.00     244/149509167     LexicalAnalyzer::next() [21]
+                0.00    0.00     467/149509167     LambdaParser::parseApply() <cycle 1> [20]
+                0.00    0.00     484/149509167     LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     699/149509167     LambdaParser::parseAtom() <cycle 1> [18]
+                0.00    0.00    5061/149509167     makeBRed(Node*) [3]
+                0.00    0.00  126501/149509167     genAns(Node*) [12]
+                0.00    0.00  155331/149509167     makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+                0.27    0.00 149220380/149509167     checkFV(Node*, std::string) [5]
+[7]     16.4    0.27    0.00 149509167         bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+-----------------------------------------------
+                0.08    0.00 56091663/56091663     __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [6]
+[8]      4.8    0.08    0.00 56091663         std::char_traits<char>::compare(char const*, char const*, unsigned long) [8]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      2.4    0.00    0.04                 __libc_csu_init [9]
+                0.02    0.00       1/1           _GLOBAL__sub_I__ZN15LexicalAnalyzerC2ESs [10]
+                0.02    0.00       1/1           _GLOBAL__sub_I_flag [11]
+-----------------------------------------------
+                0.02    0.00       1/1           __libc_csu_init [9]
+[10]     1.2    0.02    0.00       1         _GLOBAL__sub_I__ZN15LexicalAnalyzerC2ESs [10]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [87]
+-----------------------------------------------
+                0.02    0.00       1/1           __libc_csu_init [9]
+[11]     1.2    0.02    0.00       1         _GLOBAL__sub_I_flag [11]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [86]
+-----------------------------------------------
+                              168790             genAns(Node*) [12]
+                0.00    0.01       4/4           solve() [2]
+[12]     0.6    0.00    0.01       4+168790  genAns(Node*) [12]
+                0.01    0.00  168790/168790      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*) [14]
+                0.00    0.00  126501/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00   84395/84395       std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [33]
+                0.00    0.00   84395/84395       std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [32]
+                              168790             genAns(Node*) [12]
+-----------------------------------------------
+                0.00    0.01       1/1           solve() [2]
+[13]     0.6    0.00    0.01       1         parse(std::string) [13]
+                0.01    0.00       1/1           LambdaParser::~LambdaParser() [15]
+                0.00    0.00       1/1           LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00       1/1           LambdaParser::LambdaParser(std::string) [23]
+-----------------------------------------------
+                0.01    0.00  168790/168790      genAns(Node*) [12]
+[14]     0.6    0.01    0.00  168790         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*) [14]
+                0.00    0.00  168790/337580      std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&) [31]
+-----------------------------------------------
+                0.01    0.00       1/1           parse(std::string) [13]
+[15]     0.6    0.01    0.00       1         LambdaParser::~LambdaParser() [15]
+                0.00    0.00       1/1           LexicalAnalyzer::~LexicalAnalyzer() [89]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     0.6    0.01    0.00                 LambdaParser::parseCondition() [16]
+-----------------------------------------------
+[17]     0.0    0.00    0.00       1+932     <cycle 1 as a whole> [17]
+                0.00    0.00     467             LambdaParser::parseAtom() <cycle 1> [18]
+                0.00    0.00     233+9           LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     233             LambdaParser::parseApply() <cycle 1> [20]
+-----------------------------------------------
+                                 467             LambdaParser::parseApply() <cycle 1> [20]
+[18]     0.0    0.00    0.00     467         LambdaParser::parseAtom() <cycle 1> [18]
+                0.00    0.00     699/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00     464/727         LexicalAnalyzer::next() [21]
+                0.00    0.00     235/244         LambdaParser::parseVar() [22]
+                0.00    0.00     699/2445        LexicalAnalyzer::curToken() [34]
+                                 232             LambdaParser::parseExp() <cycle 1> [19]
+-----------------------------------------------
+                                   9             LambdaParser::parseExp() <cycle 1> [19]
+                                 232             LambdaParser::parseAtom() <cycle 1> [18]
+                0.00    0.00       1/1           parse(std::string) [13]
+[19]     0.0    0.00    0.00     233+9       LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     484/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00      18/727         LexicalAnalyzer::next() [21]
+                0.00    0.00       9/244         LambdaParser::parseVar() [22]
+                0.00    0.00     484/2445        LexicalAnalyzer::curToken() [34]
+                0.00    0.00       9/243         Node::Node(std::string, Node*, Node*) [61]
+                                 233             LambdaParser::parseApply() <cycle 1> [20]
+                                   9             LambdaParser::parseExp() <cycle 1> [19]
+-----------------------------------------------
+                                 233             LambdaParser::parseExp() <cycle 1> [19]
+[20]     0.0    0.00    0.00     233         LambdaParser::parseApply() <cycle 1> [20]
+                0.00    0.00     467/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00     774/2445        LexicalAnalyzer::curToken() [34]
+                0.00    0.00     234/243         Node::Node(std::string, Node*, Node*) [61]
+                                 467             LambdaParser::parseAtom() <cycle 1> [18]
+-----------------------------------------------
+                0.00    0.00       1/727         LambdaParser::LambdaParser(std::string) [23]
+                0.00    0.00      18/727         LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     244/727         LambdaParser::parseVar() [22]
+                0.00    0.00     464/727         LambdaParser::parseAtom() <cycle 1> [18]
+[21]     0.0    0.00    0.00     727         LexicalAnalyzer::next() [21]
+                0.00    0.00     244/149509167     bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*) [7]
+                0.00    0.00     488/488         myCheck(char) [41]
+-----------------------------------------------
+                0.00    0.00       9/244         LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     235/244         LambdaParser::parseAtom() <cycle 1> [18]
+[22]     0.0    0.00    0.00     244         LambdaParser::parseVar() [22]
+                0.00    0.00     244/727         LexicalAnalyzer::next() [21]
+                0.00    0.00     488/2445        LexicalAnalyzer::curToken() [34]
+                0.00    0.00     244/891598      Node::Node(std::string) [30]
+-----------------------------------------------
+                0.00    0.00       1/1           parse(std::string) [13]
+[23]     0.0    0.00    0.00       1         LambdaParser::LambdaParser(std::string) [23]
+                0.00    0.00       1/727         LexicalAnalyzer::next() [21]
+                0.00    0.00       1/1           LexicalAnalyzer::LexicalAnalyzer(std::string) [88]
+-----------------------------------------------
+                0.00    0.00     244/891598      LambdaParser::parseVar() [22]
+                0.00    0.00  891354/891598      createCopy(Node*) [38]
+[30]     0.0    0.00    0.00  891598         Node::Node(std::string) [30]
+-----------------------------------------------
+                0.00    0.00   84395/337580      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [33]
+                0.00    0.00   84395/337580      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [32]
+                0.00    0.00  168790/337580      std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*) [14]
+[31]     0.0    0.00    0.00  337580         std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&) [31]
+-----------------------------------------------
+                0.00    0.00   84395/84395       genAns(Node*) [12]
+[32]     0.0    0.00    0.00   84395         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [32]
+                0.00    0.00   84395/337580      std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&) [31]
+-----------------------------------------------
+                0.00    0.00   84395/84395       genAns(Node*) [12]
+[33]     0.0    0.00    0.00   84395         std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [33]
+                0.00    0.00   84395/337580      std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&) [31]
+-----------------------------------------------
+                0.00    0.00     484/2445        LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     488/2445        LambdaParser::parseVar() [22]
+                0.00    0.00     699/2445        LambdaParser::parseAtom() <cycle 1> [18]
+                0.00    0.00     774/2445        LambdaParser::parseApply() <cycle 1> [20]
+[34]     0.0    0.00    0.00    2445         LexicalAnalyzer::curToken() [34]
+-----------------------------------------------
+                0.00    0.00       5/746         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00     741/746         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[35]     0.0    0.00    0.00     746         std::less<int>::operator()(int const&, int const&) const [35]
+-----------------------------------------------
+                0.00    0.00     246/746         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*) [45]
+                0.00    0.00     500/746         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*) [39]
+[36]     0.0    0.00    0.00     746         std::_Identity<int>::operator()(int const&) const [36]
+-----------------------------------------------
+                0.00    0.00       6/596         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00     108/596         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::begin() [66]
+                0.00    0.00     238/596         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+                0.00    0.00     244/596         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[37]     0.0    0.00    0.00     596         std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [37]
+-----------------------------------------------
+                              890816             createCopy(Node*) [38]
+                0.00    0.00     538/538         makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [4]
+[38]     0.0    0.00    0.00     538+890816  createCopy(Node*) [38]
+                0.00    0.00  891354/891598      Node::Node(std::string) [30]
+                              890816             createCopy(Node*) [38]
+-----------------------------------------------
+                0.00    0.00     500/500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[39]     0.0    0.00    0.00     500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*) [39]
+                0.00    0.00     500/500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node<int> const*) [40]
+                0.00    0.00     500/746         std::_Identity<int>::operator()(int const&) const [36]
+-----------------------------------------------
+                0.00    0.00     500/500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*) [39]
+[40]     0.0    0.00    0.00     500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node<int> const*) [40]
+-----------------------------------------------
+                0.00    0.00     488/488         LexicalAnalyzer::next() [21]
+[41]     0.0    0.00    0.00     488         myCheck(char) [41]
+-----------------------------------------------
+                0.00    0.00       6/368         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+                0.00    0.00     362/368         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[42]     0.0    0.00    0.00     368         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_right(std::_Rb_tree_node_base*) [42]
+-----------------------------------------------
+                0.00    0.00       6/250         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00     244/250         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[43]     0.0    0.00    0.00     250         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_end() [43]
+-----------------------------------------------
+                0.00    0.00       5/249         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00     244/249         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+[44]     0.0    0.00    0.00     249         std::_Identity<int>::operator()(int&) const [44]
+-----------------------------------------------
+                0.00    0.00       5/246         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00     241/246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[45]     0.0    0.00    0.00     246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*) [45]
+                0.00    0.00     246/246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node_base const*) [46]
+                0.00    0.00     246/746         std::_Identity<int>::operator()(int const&) const [36]
+-----------------------------------------------
+                0.00    0.00     246/246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*) [45]
+[46]     0.0    0.00    0.00     246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node_base const*) [46]
+-----------------------------------------------
+                0.00    0.00       1/245         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree() [103]
+                0.00    0.00     244/245         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[47]     0.0    0.00    0.00     245         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_begin() [47]
+-----------------------------------------------
+                0.00    0.00     244/244         FreeVarGenerator::add(Node*) [90]
+[48]     0.0    0.00    0.00     244         FreeVarGenerator::add(std::string) [48]
+                0.00    0.00     244/244         FreeVarGenerator::decode(std::string) [49]
+                0.00    0.00     244/244         std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [51]
+-----------------------------------------------
+                0.00    0.00     244/244         FreeVarGenerator::add(std::string) [48]
+[49]     0.0    0.00    0.00     244         FreeVarGenerator::decode(std::string) [49]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [53]
+[50]     0.0    0.00    0.00     244         std::_Rb_tree_const_iterator<int>::_Rb_tree_const_iterator(std::_Rb_tree_iterator<int> const&) [50]
+-----------------------------------------------
+                0.00    0.00     244/244         FreeVarGenerator::add(std::string) [48]
+[51]     0.0    0.00    0.00     244         std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [51]
+                0.00    0.00     244/244         std::remove_reference<int&>::type&& std::move<int&>(int&) [56]
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [53]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+[52]     0.0    0.00    0.00     244         std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&) [52]
+                0.00    0.00     244/244         std::_Rb_tree_iterator<int>&& std::forward<std::_Rb_tree_iterator<int> >(std::remove_reference<std::_Rb_tree_iterator<int> >::type&) [59]
+                0.00    0.00     244/244         bool&& std::forward<bool>(std::remove_reference<bool>::type&) [60]
+-----------------------------------------------
+                0.00    0.00     244/244         std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [51]
+[53]     0.0    0.00    0.00     244         std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [53]
+                0.00    0.00     244/244         std::_Rb_tree_iterator<int>& std::forward<std::_Rb_tree_iterator<int>&>(std::remove_reference<std::_Rb_tree_iterator<int>&>::type&) [57]
+                0.00    0.00     244/244         std::_Rb_tree_const_iterator<int>::_Rb_tree_const_iterator(std::_Rb_tree_iterator<int> const&) [50]
+                0.00    0.00     244/244         bool& std::forward<bool&>(std::remove_reference<bool&>::type&) [58]
+-----------------------------------------------
+                0.00    0.00     244/244         std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [51]
+[54]     0.0    0.00    0.00     244         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+                0.00    0.00     244/249         std::_Identity<int>::operator()(int&) const [44]
+                0.00    0.00     244/244         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&) [52]
+                0.00    0.00     238/596         std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [37]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/6           std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+[55]     0.0    0.00    0.00     244         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+                0.00    0.00     741/746         std::less<int>::operator()(int const&, int const&) const [35]
+                0.00    0.00     500/500         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*) [39]
+                0.00    0.00     362/368         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_right(std::_Rb_tree_node_base*) [42]
+                0.00    0.00     244/245         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_begin() [47]
+                0.00    0.00     244/250         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_end() [43]
+                0.00    0.00     244/596         std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [37]
+                0.00    0.00     241/246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*) [45]
+                0.00    0.00     238/238         std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node_base*&, void>(std::_Rb_tree_node_base*&, std::_Rb_tree_node_base* const&) [62]
+                0.00    0.00     138/144         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_left(std::_Rb_tree_node_base*) [64]
+                0.00    0.00     108/108         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::begin() [66]
+                0.00    0.00     108/108         std::_Rb_tree_iterator<int>::operator==(std::_Rb_tree_iterator<int> const&) const [65]
+                0.00    0.00     105/105         std::_Rb_tree_iterator<int>::operator--() [67]
+                0.00    0.00       6/6           std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&, void>(std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&) [79]
+-----------------------------------------------
+                0.00    0.00     244/244         std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [51]
+[56]     0.0    0.00    0.00     244         std::remove_reference<int&>::type&& std::move<int&>(int&) [56]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [53]
+[57]     0.0    0.00    0.00     244         std::_Rb_tree_iterator<int>& std::forward<std::_Rb_tree_iterator<int>&>(std::remove_reference<std::_Rb_tree_iterator<int>&>::type&) [57]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [53]
+[58]     0.0    0.00    0.00     244         bool& std::forward<bool&>(std::remove_reference<bool&>::type&) [58]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&) [52]
+[59]     0.0    0.00    0.00     244         std::_Rb_tree_iterator<int>&& std::forward<std::_Rb_tree_iterator<int> >(std::remove_reference<std::_Rb_tree_iterator<int> >::type&) [59]
+-----------------------------------------------
+                0.00    0.00     244/244         std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&) [52]
+[60]     0.0    0.00    0.00     244         bool&& std::forward<bool>(std::remove_reference<bool>::type&) [60]
+-----------------------------------------------
+                0.00    0.00       9/243         LambdaParser::parseExp() <cycle 1> [19]
+                0.00    0.00     234/243         LambdaParser::parseApply() <cycle 1> [20]
+[61]     0.0    0.00    0.00     243         Node::Node(std::string, Node*, Node*) [61]
+-----------------------------------------------
+                0.00    0.00     238/238         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[62]     0.0    0.00    0.00     238         std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node_base*&, void>(std::_Rb_tree_node_base*&, std::_Rb_tree_node_base* const&) [62]
+                0.00    0.00     238/238         std::_Rb_tree_node_base*& std::forward<std::_Rb_tree_node_base*&>(std::remove_reference<std::_Rb_tree_node_base*&>::type&) [63]
+-----------------------------------------------
+                0.00    0.00     238/238         std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node_base*&, void>(std::_Rb_tree_node_base*&, std::_Rb_tree_node_base* const&) [62]
+[63]     0.0    0.00    0.00     238         std::_Rb_tree_node_base*& std::forward<std::_Rb_tree_node_base*&>(std::remove_reference<std::_Rb_tree_node_base*&>::type&) [63]
+-----------------------------------------------
+                0.00    0.00       6/144         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+                0.00    0.00     138/144         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[64]     0.0    0.00    0.00     144         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_left(std::_Rb_tree_node_base*) [64]
+-----------------------------------------------
+                0.00    0.00     108/108         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[65]     0.0    0.00    0.00     108         std::_Rb_tree_iterator<int>::operator==(std::_Rb_tree_iterator<int> const&) const [65]
+-----------------------------------------------
+                0.00    0.00     108/108         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[66]     0.0    0.00    0.00     108         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::begin() [66]
+                0.00    0.00     108/596         std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [37]
+-----------------------------------------------
+                0.00    0.00     105/105         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[67]     0.0    0.00    0.00     105         std::_Rb_tree_iterator<int>::operator--() [67]
+-----------------------------------------------
+                0.00    0.00       6/42          std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+                0.00    0.00       6/42          std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00       6/42          std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+                0.00    0.00       6/42          _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_ [78]
+                0.00    0.00       6/42          _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_ [77]
+                0.00    0.00       6/42          void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [74]
+                0.00    0.00       6/42          std::_Rb_tree_node<int>::_Rb_tree_node<int>(int&&) [76]
+[68]     0.0    0.00    0.00      42         int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+-----------------------------------------------
+                0.00    0.00       6/12          std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*) [84]
+                0.00    0.00       6/12          std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+[69]     0.0    0.00    0.00      12         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_Node_allocator() [69]
+-----------------------------------------------
+                0.00    0.00      12/12          std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&, void>(std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&) [79]
+[70]     0.0    0.00    0.00      12         std::_Rb_tree_node<int>*& std::forward<std::_Rb_tree_node<int>*&>(std::remove_reference<std::_Rb_tree_node<int>*&>::type&) [70]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_put_node(std::_Rb_tree_node<int>*) [82]
+[71]     0.0    0.00    0.00       6         __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::deallocate(std::_Rb_tree_node<int>*, unsigned long) [71]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*) [84]
+[72]     0.0    0.00    0.00       6         void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::destroy<std::_Rb_tree_node<int> >(std::_Rb_tree_node<int>*) [72]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_node() [81]
+[73]     0.0    0.00    0.00       6         __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::allocate(unsigned long, void const*) [73]
+                0.00    0.00       6/6           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::max_size() const [75]
+-----------------------------------------------
+                0.00    0.00       6/6           _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_ [77]
+[74]     0.0    0.00    0.00       6         void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [74]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/6           operator new(unsigned long, void*) [85]
+                0.00    0.00       6/6           std::_Rb_tree_node<int>::_Rb_tree_node<int>(int&&) [76]
+-----------------------------------------------
+                0.00    0.00       6/6           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::allocate(unsigned long, void const*) [73]
+[75]     0.0    0.00    0.00       6         __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::max_size() const [75]
+-----------------------------------------------
+                0.00    0.00       6/6           void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [74]
+[76]     0.0    0.00    0.00       6         std::_Rb_tree_node<int>::_Rb_tree_node<int>(int&&) [76]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+-----------------------------------------------
+                0.00    0.00       6/6           _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_ [78]
+[77]     0.0    0.00    0.00       6         _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_ [77]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/6           void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [74]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+[78]     0.0    0.00    0.00       6         _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_ [78]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/6           _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_ [77]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&) [55]
+[79]     0.0    0.00    0.00       6         std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&, void>(std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&) [79]
+                0.00    0.00      12/12          std::_Rb_tree_node<int>*& std::forward<std::_Rb_tree_node<int>*&>(std::remove_reference<std::_Rb_tree_node<int>*&>::type&) [70]
+-----------------------------------------------
+                0.00    0.00       6/6           std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&) [54]
+[80]     0.0    0.00    0.00       6         std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+                0.00    0.00       6/250         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_end() [43]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/6           std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+                0.00    0.00       6/596         std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [37]
+                0.00    0.00       5/246         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*) [45]
+                0.00    0.00       5/249         std::_Identity<int>::operator()(int&) const [44]
+                0.00    0.00       5/746         std::less<int>::operator()(int const&, int const&) const [35]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+[81]     0.0    0.00    0.00       6         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_node() [81]
+                0.00    0.00       6/6           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::allocate(unsigned long, void const*) [73]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*) [84]
+[82]     0.0    0.00    0.00       6         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_put_node(std::_Rb_tree_node<int>*) [82]
+                0.00    0.00       6/6           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::deallocate(std::_Rb_tree_node<int>*, unsigned long) [71]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [80]
+[83]     0.0    0.00    0.00       6         std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [83]
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_node() [81]
+                0.00    0.00       6/42          int&& std::forward<int>(std::remove_reference<int>::type&) [68]
+                0.00    0.00       6/12          std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_Node_allocator() [69]
+                0.00    0.00       6/6           _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_ [78]
+-----------------------------------------------
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+[84]     0.0    0.00    0.00       6         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*) [84]
+                0.00    0.00       6/12          std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_Node_allocator() [69]
+                0.00    0.00       6/6           void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::destroy<std::_Rb_tree_node<int> >(std::_Rb_tree_node<int>*) [72]
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_put_node(std::_Rb_tree_node<int>*) [82]
+-----------------------------------------------
+                0.00    0.00       6/6           void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [74]
+[85]     0.0    0.00    0.00       6         operator new(unsigned long, void*) [85]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_flag [11]
+[86]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [86]
+                0.00    0.00       1/1           FreeVarGenerator::FreeVarGenerator() [91]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I__ZN15LexicalAnalyzerC2ESs [10]
+[87]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [87]
+-----------------------------------------------
+                0.00    0.00       1/1           LambdaParser::LambdaParser(std::string) [23]
+[88]     0.0    0.00    0.00       1         LexicalAnalyzer::LexicalAnalyzer(std::string) [88]
+-----------------------------------------------
+                0.00    0.00       1/1           LambdaParser::~LambdaParser() [15]
+[89]     0.0    0.00    0.00       1         LexicalAnalyzer::~LexicalAnalyzer() [89]
+-----------------------------------------------
+                                 486             FreeVarGenerator::add(Node*) [90]
+                0.00    0.00       1/1           solve() [2]
+[90]     0.0    0.00    0.00       1+486     FreeVarGenerator::add(Node*) [90]
+                0.00    0.00     244/244         FreeVarGenerator::add(std::string) [48]
+                                 486             FreeVarGenerator::add(Node*) [90]
+-----------------------------------------------
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [86]
+[91]     0.0    0.00    0.00       1         FreeVarGenerator::FreeVarGenerator() [91]
+                0.00    0.00       1/1           std::set<int, std::less<int>, std::allocator<int> >::set() [96]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<std::_Rb_tree_node<int> >::allocator() [94]
+[92]     0.0    0.00    0.00       1         __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::new_allocator() [92]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<std::_Rb_tree_node<int> >::~allocator() [95]
+[93]     0.0    0.00    0.00       1         __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::~new_allocator() [93]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl() [99]
+[94]     0.0    0.00    0.00       1         std::allocator<std::_Rb_tree_node<int> >::allocator() [94]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::new_allocator() [92]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::~_Rb_tree_impl() [100]
+[95]     0.0    0.00    0.00       1         std::allocator<std::_Rb_tree_node<int> >::~allocator() [95]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::~new_allocator() [93]
+-----------------------------------------------
+                0.00    0.00       1/1           FreeVarGenerator::FreeVarGenerator() [91]
+[96]     0.0    0.00    0.00       1         std::set<int, std::less<int>, std::allocator<int> >::set() [96]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree() [102]
+-----------------------------------------------
+                0.00    0.00       1/1           FreeVarGenerator::~FreeVarGenerator() [106]
+[97]     0.0    0.00    0.00       1         std::set<int, std::less<int>, std::allocator<int> >::~set() [97]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree() [103]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl() [99]
+[98]     0.0    0.00    0.00       1         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_M_initialize() [98]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree() [102]
+[99]     0.0    0.00    0.00       1         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl() [99]
+                0.00    0.00       1/1           std::allocator<std::_Rb_tree_node<int> >::allocator() [94]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_M_initialize() [98]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree() [103]
+[100]    0.0    0.00    0.00       1         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::~_Rb_tree_impl() [100]
+                0.00    0.00       1/1           std::allocator<std::_Rb_tree_node<int> >::~allocator() [95]
+-----------------------------------------------
+                                   6             std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree() [103]
+[101]    0.0    0.00    0.00       1+6       std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+                0.00    0.00       6/368         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_right(std::_Rb_tree_node_base*) [42]
+                0.00    0.00       6/144         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_left(std::_Rb_tree_node_base*) [64]
+                0.00    0.00       6/6           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*) [84]
+                                   6             std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+-----------------------------------------------
+                0.00    0.00       1/1           std::set<int, std::less<int>, std::allocator<int> >::set() [96]
+[102]    0.0    0.00    0.00       1         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree() [102]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl() [99]
+-----------------------------------------------
+                0.00    0.00       1/1           std::set<int, std::less<int>, std::allocator<int> >::~set() [97]
+[103]    0.0    0.00    0.00       1         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree() [103]
+                0.00    0.00       1/245         std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_begin() [47]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*) [101]
+                0.00    0.00       1/1           std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::~_Rb_tree_impl() [100]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [10] _GLOBAL__sub_I__ZN15LexicalAnalyzerC2ESs [74] void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::construct<std::_Rb_tree_node<int>, int>(std::_Rb_tree_node<int>*, int&&) [54] std::pair<std::_Rb_tree_iterator<int>, bool> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_unique<int>(int&&)
+  [11] _GLOBAL__sub_I_flag    [92] __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::new_allocator() [69] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_Node_allocator()
+  [38] createCopy(Node*)      [93] __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::~new_allocator() [55] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_insert_unique_pos(int const&)
+  [86] __static_initialization_and_destruction_0(int, int) [75] __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::max_size() const [66] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::begin()
+  [87] __static_initialization_and_destruction_0(int, int) [65] std::_Rb_tree_iterator<int>::operator==(std::_Rb_tree_iterator<int> const&) const [43] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_end()
+  [13] parse(std::string)     [35] std::less<int>::operator()(int const&, int const&) const [39] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node<int> const*)
+   [2] solve()                [36] std::_Identity<int>::operator()(int const&) const [45] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_key(std::_Rb_tree_node_base const*)
+  [12] genAns(Node*)          [44] std::_Identity<int>::operator()(int&) const [64] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_left(std::_Rb_tree_node_base*)
+   [5] checkFV(Node*, std::string) [94] std::allocator<std::_Rb_tree_node<int> >::allocator() [47] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_begin()
+  [41] myCheck(char)          [95] std::allocator<std::_Rb_tree_node<int> >::~allocator() [101] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_erase(std::_Rb_tree_node<int>*)
+   [3] makeBRed(Node*)         [8] std::char_traits<char>::compare(char const*, char const*, unsigned long) [42] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_right(std::_Rb_tree_node_base*)
+   [4] makeSubst(Node*, std::string, Node*, int&, FreeVarGenerator&) [76] std::_Rb_tree_node<int>::_Rb_tree_node<int>(int&&) [40] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node<int> const*)
+  [20] LambdaParser::parseApply() [77] _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE12_S_constructIS1_IiEEENSt9enable_ifIXsrNS3_18__construct_helperIT_IDpT0_EEE5valueEvE4typeERS2_PS7_DpOS8_ [46] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_S_value(std::_Rb_tree_node_base const*)
+  [16] LambdaParser::parseCondition() [78] _ZNSt16allocator_traitsISaISt13_Rb_tree_nodeIiEEE9constructIS1_IiEEEDTcl12_S_constructfp_fp0_spcl7forwardIT0_Efp1_EEERS2_PT_DpOS5_ [102] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree()
+  [19] LambdaParser::parseExp() [37] std::_Rb_tree_iterator<int>::_Rb_tree_iterator(std::_Rb_tree_node<int>*) [103] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::~_Rb_tree()
+  [22] LambdaParser::parseVar() [67] std::_Rb_tree_iterator<int>::operator--() [31] std::remove_reference<std::string&>::type&& std::move<std::string&>(std::string&)
+  [18] LambdaParser::parseAtom() [50] std::_Rb_tree_const_iterator<int>::_Rb_tree_const_iterator(std::_Rb_tree_iterator<int> const&) [56] std::remove_reference<int&>::type&& std::move<int&>(int&)
+  [23] LambdaParser::LambdaParser(std::string) [51] std::set<int, std::less<int>, std::allocator<int> >::insert(int&&) [70] std::_Rb_tree_node<int>*& std::forward<std::_Rb_tree_node<int>*&>(std::remove_reference<std::_Rb_tree_node<int>*&>::type&)
+  [15] LambdaParser::~LambdaParser() [96] std::set<int, std::less<int>, std::allocator<int> >::set() [63] std::_Rb_tree_node_base*& std::forward<std::_Rb_tree_node_base*&>(std::remove_reference<std::_Rb_tree_node_base*&>::type&)
+  [21] LexicalAnalyzer::next() [97] std::set<int, std::less<int>, std::allocator<int> >::~set() [57] std::_Rb_tree_iterator<int>& std::forward<std::_Rb_tree_iterator<int>&>(std::remove_reference<std::_Rb_tree_iterator<int>&>::type&)
+  [34] LexicalAnalyzer::curToken() [62] std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node_base*&, void>(std::_Rb_tree_node_base*&, std::_Rb_tree_node_base* const&) [58] bool& std::forward<bool&>(std::remove_reference<bool&>::type&)
+  [88] LexicalAnalyzer::LexicalAnalyzer(std::string) [79] std::pair<std::_Rb_tree_node_base*, std::_Rb_tree_node_base*>::pair<std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&, void>(std::_Rb_tree_node<int>*&, std::_Rb_tree_node<int>*&) [59] std::_Rb_tree_iterator<int>&& std::forward<std::_Rb_tree_iterator<int> >(std::remove_reference<std::_Rb_tree_iterator<int> >::type&)
+  [89] LexicalAnalyzer::~LexicalAnalyzer() [52] std::pair<std::_Rb_tree_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>, bool, void>(std::_Rb_tree_iterator<int>&&, bool&&) [60] bool&& std::forward<bool>(std::remove_reference<bool>::type&)
+  [90] FreeVarGenerator::add(Node*) [53] std::pair<std::_Rb_tree_const_iterator<int>, bool>::pair<std::_Rb_tree_iterator<int>&, bool&, void>(std::_Rb_tree_iterator<int>&, bool&) [68] int&& std::forward<int>(std::remove_reference<int>::type&)
+  [48] FreeVarGenerator::add(std::string) [80] std::_Rb_tree_iterator<int> std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_insert_<int>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, int&&) [6] __gnu_cxx::__enable_if<std::__is_char<char>::__value, bool>::__type std::operator==<char>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [49] FreeVarGenerator::decode(std::string) [81] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_get_node() [7] bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)
+  [91] FreeVarGenerator::FreeVarGenerator() [82] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_put_node(std::_Rb_tree_node<int>*) [14] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*)
+  [30] Node::Node(std::string) [98] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_M_initialize() [32] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  [61] Node::Node(std::string, Node*, Node*) [99] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::_Rb_tree_impl() [33] std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+  [71] __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::deallocate(std::_Rb_tree_node<int>*, unsigned long) [100] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_Rb_tree_impl<std::less<int>, true>::~_Rb_tree_impl() [85] operator new(unsigned long, void*)
+  [72] void __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::destroy<std::_Rb_tree_node<int> >(std::_Rb_tree_node<int>*) [83] std::_Rb_tree_node<int>* std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_create_node<int>(int&&) [17] <cycle 1>
+  [73] __gnu_cxx::new_allocator<std::_Rb_tree_node<int> >::allocate(unsigned long, void const*) [84] std::_Rb_tree<int, int, std::_Identity<int>, std::less<int>, std::allocator<int> >::_M_destroy_node(std::_Rb_tree_node<int>*)
