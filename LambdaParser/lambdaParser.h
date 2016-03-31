@@ -2,7 +2,11 @@
 
 #ifndef LABMDA_PARSER
 #define LABMDA_PARSER
+//#define LABMDA_PARSER
+struct Node;
    
+typedef shared_ptr < Node > SNode;
+
 struct LexicalAnalyzer {
     string s;
     string token;
@@ -14,7 +18,7 @@ struct LexicalAnalyzer {
 ull binPow(ull a, int b) ;
 
 struct Hash {
-    int len;
+    long long len;
     ull hash;
     Hash(string s) {
         len = s.size();
@@ -29,34 +33,37 @@ struct Hash {
     }
 };
 
+extern int cntCon1;
+extern int cntCon2;
+extern int cntDest;
+extern int cntSub;
+
 struct Node {
     string type;
-private:
-    Node * l, * r;
+    const shared_ptr < Node > l, r;
+    int h;
     Hash hash;
-public:
     Node (string type);
-    Node (string type, Node * l, Node * r);
+    Node (string type, shared_ptr < Node > l, shared_ptr < Node > r);
+    ~Node();
 
 private:
     void updateHash();
 public:
     ull getHash();
     int getLen();
-    Node * getL();
-    Node * getR();
-    void setL(Node * v);
-    void setR(Node * v);
+    shared_ptr < Node > getL();
+    shared_ptr < Node > getR();
 };
 
 struct LambdaParser {
     LexicalAnalyzer lex;
     LambdaParser(string s);
-    Node * parseExp();
-    Node * parseApply();
-    Node * parseAtom();
-    Node * parseVar();
-    Node * parseCondition();
+    shared_ptr < Node > parseExp();
+    shared_ptr < Node > parseApply();
+    shared_ptr < Node > parseAtom();
+    shared_ptr < Node > parseVar();
+    shared_ptr < Node > parseCondition();
 };
 // tools
 
@@ -67,7 +74,7 @@ struct FreeVarGenerator {
 
     FreeVarGenerator();
 
-    void add(Node * v);
+    void add(shared_ptr < Node > v);
     void add(string s);
     string code(int x);
     int decode(string s);
@@ -75,17 +82,17 @@ struct FreeVarGenerator {
     
 };
 
-//set < string > genFV(Node * v);
+//set < string > genFV(shared_ptr < Node > v);
 
-Node * createCopy(Node * v);
+//shared_ptr < Node > createCopy(shared_ptr < Node > v);
 
-bool checkFV(Node * v, string var);
+bool checkFV(shared_ptr < Node > v, string var);
 
-Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen);
+shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < Node > u, int & cnt, FreeVarGenerator & gen);
 
-string genAns(Node * v);
+string genAns(shared_ptr < Node > v);
 
-Node * parse(string s);
+shared_ptr < Node > parse(string s);
 
 #endif
 

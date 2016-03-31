@@ -13,7 +13,6 @@ bool myCheck(char ch) {
     return 0;
 }
 
-
 ull binPow(ull a, int b) {
     ull res = 1;
     for (; b > 0; b /= 2) {
@@ -49,12 +48,20 @@ void LexicalAnalyzer::next() {
     token = s.substr(t, cur - t);
 }
 
+int cntCon1;
+int cntCon2;
+int cntDest;
 
-Node :: Node (string type): type(type), l(NULL), r(NULL), hash(type) {
+Node :: Node (string type): type(type), l(NULL), r(NULL), h(0), hash(type) {
+    cntCon1++;
 }
 
-Node :: Node (string type, Node * l, Node * r): type(type), l(l), r(r) { 
+Node :: Node (string type, shared_ptr < Node > l, shared_ptr < Node > r): type(type), l(l), r(r) { 
     updateHash();
+    cntCon2++;
+}
+Node :: ~Node() {
+    cntDest++;
 }
 
 ull Node::getHash() {
@@ -66,11 +73,15 @@ int Node::getLen() {
 }
 
 void Node::updateHash() {
+    h = 0;
+    if (l != NULL) h = max(h, l->h + 1);
+    if (r != NULL) h = max(h, r->h + 1);
     if (type == "APPLY") {
         hash = Hash("(") + l->hash + Hash(" ") + r->hash + Hash(")");
         return;
     }
     if (type == "ABSTR") {
+        assert(islower(l->type[0]));
         hash = Hash("(\\") + l->hash + Hash(".") + r->hash + Hash(")");
         return;
     } 
@@ -79,19 +90,19 @@ void Node::updateHash() {
     assert(false);
 }
 
-Node * Node::getL() { return l; }
+shared_ptr < Node > Node::getL() { return l; }
 
-Node * Node::getR() { return r; } 
+shared_ptr < Node > Node::getR() { return r; } 
 
-void Node::setL(Node * v) {
-    l = v;
-    updateHash();
-}
+//void Node::setL(shared_ptr < Node > v) {
+    //l = v;
+    //updateHash();
+//}
 
-void Node::setR(Node * v) {
-    r = v;
-    updateHash();
-}
+//void Node::setR(shared_ptr < Node > v) {
+    //r = v;
+    //updateHash();
+//}
 
 string LexicalAnalyzer::curToken() {
     return token;
@@ -101,41 +112,41 @@ LambdaParser::LambdaParser(string s): lex(s) {
     lex.next();
 }
 
-Node * LambdaParser::parseExp() {
+shared_ptr < Node > LambdaParser::parseExp() {
     if (lex.curToken() == "\\") {
         lex.next();
-        Node * v = parseVar();
+        shared_ptr < Node > v = parseVar();
         assert(lex.curToken() == ".");
         lex.next();
-        Node * u = parseExp(); 
-        return new Node("ABSTR", v, u);
+        shared_ptr < Node > u = parseExp(); 
+        return shared_ptr < Node > (new Node("ABSTR", v, u));
     }
-    Node * g = parseApply();
+    shared_ptr < Node > g = parseApply();
     if (lex.curToken() == "\\") {
         lex.next();
-        Node * v = parseVar();
+        shared_ptr < Node > v = parseVar();
         assert(lex.curToken() == ".");
         lex.next();
-        Node * u = parseExp(); 
-        return new Node("APPLY", g, new Node("ABSTR", v, u));
+        shared_ptr < Node > u = parseExp(); 
+        return shared_ptr < Node > (new Node("APPLY", g, SNode(new Node("ABSTR", v, u))));
     }
     return g;
 }
 
 
-Node * LambdaParser::parseApply() {
-    Node * v = parseAtom();
+shared_ptr < Node > LambdaParser::parseApply() {
+    shared_ptr < Node > v = parseAtom();
     for (; lex.curToken() == "(" || isalpha(lex.curToken()[0]);) {
-        Node * u = parseAtom();
-        v = new Node("APPLY", v, u);
+        shared_ptr < Node > u = parseAtom();
+        v = shared_ptr < Node > (new Node("APPLY", v, u));
     }
     return v;
 }
 
-Node * LambdaParser::parseAtom() {
+shared_ptr < Node > LambdaParser::parseAtom() {
     if (lex.curToken() == "(") {
         lex.next();
-        Node * v = parseExp();
+        shared_ptr < Node > v = parseExp();
         assert(lex.curToken() == ")");
         lex.next();
         return v;
@@ -144,30 +155,30 @@ Node * LambdaParser::parseAtom() {
 }
 
 
-Node * LambdaParser::parseVar() {
+shared_ptr < Node > LambdaParser::parseVar() {
     assert(isalpha(lex.curToken()[0]));
     string s = lex.curToken();
     lex.next();
-    return new Node(s);
+    return shared_ptr < Node > (new Node(s));
 }
 
-Node * LambdaParser::parseCondition() {
-    Node * v = parseExp();    
+shared_ptr < Node > LambdaParser::parseCondition() {
+    shared_ptr < Node > v = parseExp();    
     assert(lex.curToken() == "[");
     lex.next();
-    Node * u = parseVar();
+    shared_ptr < Node > u = parseVar();
     assert(lex.curToken() == ":=");
     lex.next();
-    Node * g = parseExp();
+    shared_ptr < Node > g = parseExp();
     assert(lex.curToken() == "]");
     lex.next();
-    return new Node("COND", v, new Node("COND", u, g));
+    return shared_ptr < Node > (new Node("COND", v, shared_ptr < Node > (new Node("COND", u, g))));
 }
 
 
 
 // tools
-//set < string > genFV(Node * v) {
+//set < string > genFV(shared_ptr < Node > v) {
     //if (islower(v->type[0])) {
         //set < string > q;
         //q.insert(v->type);
@@ -187,7 +198,7 @@ Node * LambdaParser::parseCondition() {
     //assert(false);
 //}
 
-bool checkFV(Node * v, string var) {
+bool checkFV(shared_ptr < Node > v, string var) {
     if (islower(v->type[0]))
         return v->type == var;
     if (v->type == "APPLY") {
@@ -202,16 +213,16 @@ bool checkFV(Node * v, string var) {
 
 int cntN = 0;
 
-Node * createCopy(Node * v) {
-    cntN++;
-    if (cntN % 500000 == 0)
-        db(cntN);
-    if (islower(v->type[0]))  
-        return new Node(v->type);
-    return new Node(v->type, createCopy(v->getL()), createCopy(v->getR()));
-}
+//shared_ptr < Node > createCopy(shared_ptr < Node > v) {
+    //cntN++;
+    //if (cntN % 500000 == 0)
+        //db(cntN);
+    //if (islower(v->type[0]))  
+        //return shared_ptr < Node > (new Node(v->type));
+    //return shared_ptr < Node > (new Node(v->type, createCopy(v->getL()), createCopy(v->getR())));
+//}
 
-void checkEqual(Node * v, Node * u) {
+void checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
     assert(v != NULL && u != NULL);
     assert(v->type == u->type);
     if (v->getL() != NULL) checkEqual(v->getL(), u->getL());
@@ -219,18 +230,28 @@ void checkEqual(Node * v, Node * u) {
 
 }
 
-Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & gen) {
+int cntSub;
+
+shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < Node > u, int & cnt, FreeVarGenerator & gen) {
+    cntSub++;
+    if (cntSub % 1000000 == 0)
+        db(cntSub);
+
     if (islower(v->type[0])) {
         if (v->type == name) {
             cnt++;
-            return createCopy(u);
+            return u;
         }
         return v;
     }
     //db(v->type);
     if (v->type == "APPLY") {
-        v->setL(makeSubst(v->getL(), name, u, cnt, gen));
-        v->setR(makeSubst(v->getR(), name, u, cnt, gen));
+        int cc = cnt;
+        auto ll = makeSubst(v->getL(), name, u, cnt, gen);
+        auto rr = makeSubst(v->getR(), name, u, cnt, gen);
+        if (cnt > cc)  {
+            v = shared_ptr < Node > (new Node(v->type, ll, rr));
+        }
         return v;
     }
     if (v->type == "ABSTR") {
@@ -239,25 +260,37 @@ Node * makeSubst(Node * v, string name, Node * u, int & cnt, FreeVarGenerator & 
         //auto fvU = genFV(u);
         //bool checkFVy = check
 
+        if (!(islower(v->getL()->type[0]))) {
+            db(v->getL()->type);
+        }
         assert(islower(v->getL()->type[0]));
         string y = v->getL()->type;
         if (checkFV(u, y)) {
+        //if (false) {
             //assert(false);
             string z = gen.next();
-            v->getL()->type = z;
+            //v->getL()->type = z;
             int cc = 0;
-            //Node * gg;
-            v->setR(makeSubst(v->getR(), y, new Node(z), cc, gen));
-            v->setR(makeSubst(v->getR(), name, u, cnt, gen));
+            //shared_ptr < Node > gg;
+            v = shared_ptr < Node > (new Node(v->type, shared_ptr < Node > (new Node(z)), makeSubst(v->getR(), y, shared_ptr < Node > (new Node(z)), cc, gen)));
+            v = shared_ptr < Node > (new Node(v->type, v->getL(), makeSubst(v->getR(), name, u, cnt, gen)));
+            //assert(cnt > 0);
+            //db("b_2");
+            //v = shared_ptr < Node > (new Node(v->type, ll, rr));
+            //db("a_2");
         }
-        else  
-            v->setR(makeSubst(v->getR(), name, u, cnt, gen));
+        else {
+            int cc = cnt;
+            auto rr = makeSubst(v->getR(), name, u, cnt, gen);
+            if (cnt > cc) 
+                v = shared_ptr < Node > (new Node(v->type, v->getL(), rr));
+        }
         return v;
     }
     assert(false);
 }
 
-string genAns(Node * v) {
+string genAns(shared_ptr < Node > v) {
     if (islower(v->type[0]))
         return v->type;
     if (v->type == "APPLY") return "(" + genAns(v->getL()) + " " + genAns(v->getR()) + ")";
@@ -269,9 +302,9 @@ string genAns(Node * v) {
 const int BASE = 37;
 const char BACK_QUOTE = '`';
 
-FreeVarGenerator::FreeVarGenerator(): cur(0) { }
+FreeVarGenerator::FreeVarGenerator(): cur(1) { }
 
-void FreeVarGenerator::add(Node * v) {
+void FreeVarGenerator::add(shared_ptr < Node > v) {
     if (islower(v->type[0])) 
         add(v->type);
     else {
@@ -285,42 +318,21 @@ void FreeVarGenerator::add(string s) {
 }
 
 string FreeVarGenerator::code(int x) {
-    string s;
-    if (x == 0) return "a";
-    for (; x > 0; x /= BASE) {
-        char ch = x % BASE;
-        if (ch < 26)
-            ch += 'a';
-        else if (ch < 36)
-            ch += '0';
-        else
-            ch = BACK_QUOTE;
-        s += ch;
-    } 
-
+    string s; 
+    for (; x > 0; x /= 10)
+        s += '0' + x % 10; 
     reverse(s.begin(), s.end());
-    return s;
+    return "t" + s;
 }
 
 int FreeVarGenerator::decode(string s) {
-    if (s.size() > 5) return int(1e9);
-    int h = 0;
-    int deg = 1;
-    for (int i = 0; i < (int)s.size(); i++) {
-        int ch;
-        if (islower(s[i])) 
-            ch = s[i] - 'a';
-        else if (isdigit(s[i])) 
-            ch = s[i] - '0';
-        else {
-            assert(s[i] == BACK_QUOTE);
-            ch = BASE - 1;
-        }
-        assert(0 <= ch && ch < BASE);
-        h += deg * ch;                
-        deg *= BASE;
+    if (s.size() > 5) return 0;
+    if (s[0] != 't') return 0;
+    int x = 0;
+    for (int i = 1; i < (int)s.size(); i++) {
+        x = x * 10 + s[i] - '0';
     }
-    return h;
+    return x;
 }
 
 string FreeVarGenerator::next() {
@@ -329,7 +341,7 @@ string FreeVarGenerator::next() {
     return code(cur);
 }
 
-Node * parse(string s) {
+shared_ptr < Node > parse(string s) {
     LambdaParser parser(s);
     return parser.parseExp();
 }
