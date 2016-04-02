@@ -17,4 +17,4 @@ $(HWID): $(HWID).o lambdaParser.o
 
 clean:
 	rm -f *.o 
-	rm bin/*
+	rm -f bin/*

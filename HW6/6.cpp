@@ -108,13 +108,19 @@ int rec(shared_ptr < Node > v) {
     }
     assert(false);
 
+} 
+
+string myToString (int x) {
+    char s[100];
+    sprintf(s, "%d", x);
+    return s;
 }
 
 string f(int id) {
     if (g.count(id) == 1) {
         return g[id]->toString();
     }
-    return "t" + to_string(id);
+    return "t" + myToString(id);
 }
 
 void solve() {

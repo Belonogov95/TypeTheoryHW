@@ -2,7 +2,7 @@
 #define MAIN_H
 
 #include <iostream>
-#include <cmath>
+//#include <cmath>
 #include <vector>
 #include <map>
 #include <set>
@@ -34,6 +34,12 @@ using namespace std;
 typedef string Token;
 typedef unsigned long long ull;
 const int P = 997;
+
+//string to_string(int x) {
+    //char s[100];
+    //sprintf(s, "%d", x);
+    //return s;
+//}
 
 #endif
 
