@@ -2,8 +2,8 @@
 #include "../LambdaParser/lambdaParser.h"
 #include "termParser.h"
 
-int cur = 0;
-map < string, int > varId; 
+int cur = 1;
+map < string, string > varId; 
 vector < pair < shared_ptr < TNode > , shared_ptr < TNode > > > G;
 
 void ret() {
@@ -53,11 +53,21 @@ shared_ptr < TNode > makeSubst(shared_ptr < TNode > v, string var, shared_ptr < 
     return shared_ptr < TNode > (new TNode(v->type, ch));
 }
 
+string printAns(shared_ptr < TNode > v) {
+    if (v->checkVar()) {
+        return v->type;         
+    }
+    return "(" + printAns(v->ch[0]) + "->" + printAns(v->ch[1]) + ")";  
+}
 
 void go() {
     bool flagChanged = 1;
     for (int it = 0;flagChanged; it++) {
-        //db(it);
+        //cerr << "============================\n";
+        //for (auto x: G)
+            //cerr << printAns(x.fr) << " = " << printAns(x.sc) << endl;
+        //cerr << "============================\n";
+
         
         flagChanged = 0;
         for (int i = 0; i < (int)G.size(); i++) {
@@ -130,18 +140,30 @@ void go() {
 }
 
 
-string rec(shared_ptr < Node > v) {
-    cerr << genAns(v) << endl;
+string rec(shared_ptr < Node > v, map < string, string > q) {
+    //cerr << genAns(v) << endl;
     if (v->isVar()) {
-        int id;
-        if (varId.count(v->type) == 0) 
-            varId[v->type] = cur++;
-        id = varId[v->type]; 
-        return "t" + myToString(id);
+        //int id;
+        //db(q.size());
+        //for (auto x: q)
+            //db2(x.fr, x.sc);
+        //db(v->type);
+
+        assert(q.count(v->type) == 1);
+        return q[v->type]; 
     } 
-    string l = rec(v->l);
-    string r = rec(v->r);
+
+    //db(v->type);
+    if (v->isAbstr()) {
+        string s = v->l->type;
+        string vv = "t" + myToString(cur++);
+        q[s] = vv; 
+    }
+
+    string l = rec(v->l, q);
+    string r = rec(v->r, q);
     string myId = "t" + myToString(cur++);
+    varId[myId] = genAns(v);
 
     //cerr << "l r myId: " << l << " " << r << " " << myId << endl;
     if (v->type == "APPLY") {
@@ -163,28 +185,27 @@ string rec(shared_ptr < Node > v) {
     assert(false);
 }
 
-string printAns(shared_ptr < TNode > v) {
-    if (v->checkVar()) {
-        return v->type;         
-    }
-    return "(" + printAns(v->ch[0]) + "->" + printAns(v->ch[1]) + ")";  
-}
+
 
 void solve() {
     string s;
     getline(cin, s);
     shared_ptr < Node > head = parse(s);
-    string answer = rec(head);
-    cerr << genAns(head) << endl;
-    for (auto x: G) {
-        cerr << x.fr << " =  " << x.sc << endl;
-    }
+    map < string, string > q;
+    string answer = rec(head, q);
+    //cerr << genAns(head) << endl;
+    //for (auto x: G) {
+        //cerr << x.fr << " =  " << x.sc << endl;
+    //}
+    //for (auto x: varId) {
+        //cerr << x.fr << ": " << x.sc << endl;
+    //}
 
     go();
-    db(answer);
-    for (auto x: G) {
-        cerr << x.fr << " =  " << x.sc << endl;
-    }
+    //db(answer);
+    //for (auto x: G) {
+        //cerr << x.fr << " =  " << x.sc << endl;
+    //}
     
     for (int i = 0; i < (int)G.size(); i++) {
         if (G[i].fr->type == answer) {
