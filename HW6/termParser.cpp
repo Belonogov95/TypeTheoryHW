@@ -1,7 +1,10 @@
 #include "termParser.h"
 
 
+
 TNode::TNode (string type, vector < shared_ptr < TNode > > ch): type(type), ch(ch) { }
+
+TNode::TNode (string type): type(type) { }
 
 
 bool TNode::checkFun() {
@@ -51,7 +54,7 @@ ostream & operator <<(ostream & os, shared_ptr < TNode > v) {
 }
 
 
-LexicalAnalyzer::LexicalAnalyzer(string s): s(s) {
+LexicalAnalyzerT::LexicalAnalyzerT(string s): s(s) {
     cur = 0;
     next();
 }
@@ -69,7 +72,7 @@ bool isFun(char ch) {
 }
 
 
-void LexicalAnalyzer::next() {
+void LexicalAnalyzerT::next() {
     for (; cur < (int)s.size() && isspace(s[cur]); cur++);
     if (cur == (int)s.size()) {
         token = "";
@@ -88,7 +91,7 @@ void LexicalAnalyzer::next() {
     
 }
 
-string LexicalAnalyzer::curToken() {
+string LexicalAnalyzerT::curToken() {
     return token;
 }
 

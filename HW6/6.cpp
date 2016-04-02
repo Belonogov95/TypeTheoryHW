@@ -1,29 +1,18 @@
 #include "../LambdaParser/main.h"
 #include "../LambdaParser/lambdaParser.h"
-
-struct TNode {
-    int id;
-    TNode * l, * r;
-    TNode(int id): id(id), l(NULL), r(NULL) { }
-    TNode(TNode * l, TNode * r): id(-1), l(l), r(r) { }
-    string toString() {
-        if (id >= 0) 
-            return "t" + to_string(id);
-        return "(" + l->toString() + "->" + r->toString() + ")";
-    }
-};
+#include "termParser.h"
 
 int cur = 0;
 map < string, int > varId; 
-map < int, TNode * > g;
-
+vector < pair < shared_ptr < TNode > , shared_ptr < TNode > > > G;
 
 void ret() {
     cout << "Lambda expression doesn't has a type" << endl;
     exit(0);
 }
 
-//bool checkEqual(TNode * v, TNode * u) {
+
+//bool checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
     //if ((v == NULL) != (u != NULL)) return 0;
     //assert(v != NULL && u != NULL);
     //if (v->id != u->id) return 0;
@@ -33,118 +22,158 @@ void ret() {
         //return 0;
 
     //return 1;
+//T}
+
+//bool checkFree(shared_ptr < TNode > v, int id) {
+    //if (v == NULL) return 0;
+    //if (v->id == id) return 1;
+    //return checkFree(v->l, id) || checkFree(v->r, id);
 //}
 
-bool checkFree(TNode * v, int id) {
-    if (v == NULL) return 0;
-    if (v->id == id) return 1;
-    return checkFree(v->l, id) || checkFree(v->r, id);
+string myToString(int id) {
+    char s[100];
+    sprintf(s, "%d", id);
+    return s;
 }
 
-TNode * makeSubst(TNode * v, int id, TNode * u) {
-    if (v->id == id) return u;
-    if (v->l != NULL)
-        v->l = makeSubst(v->l, id, u);
-    if (v->r != NULL)
-        v->r = makeSubst(v->r, id, u);
-    return v;
+bool findVar(string var, shared_ptr < TNode > u) {
+    if (u->type == var) return 1; 
+    for (auto h: u->ch)
+        if (findVar(var, h)) return 1;        
+    return 0;
 }
 
-void add(TNode * v, TNode * u) {
-    db2(v->toString(), u->toString());
-    if (v->id == -1 && u-> id == -1) {
-        add(v->l, u->l);
-        add(v->r, u->r);
-        return;
+shared_ptr < TNode > makeSubst(shared_ptr < TNode > v, string var, shared_ptr < TNode > u) {
+    //cerr << "---------------   " <<  v << " " << var << " " << u << endl;
+    if (v->type == var) return u;
+    vector < shared_ptr < TNode > > ch;
+    for (auto & h: v->ch) {
+        ch.pb(makeSubst(h, var, u));
     }
-    if (v->id == u->id && v->id != -1) 
-        return; 
-    if (v->id < u->id) swap(v, u);
-    int id = v->id;
-    assert(id >= 0);
+    return shared_ptr < TNode > (new TNode(v->type, ch));
+}
 
-    if (checkFree(u, id)) {
-        cerr << u->toString() << endl;
-        ret();
-    }
-    
-    if (g.count(id) == 1) {
-        add(g[id], u);
-        return;
-    }  
-    for (auto & x: g) {
-        if (checkFree(x.sc, id)) {
-            if (checkFree(u, x.fr)) {
-                db("here");
-                ret();
-            } 
-            x.sc = makeSubst(x.sc, id, u);
+
+void go() {
+    bool flagChanged = 1;
+    for (int it = 0;flagChanged; it++) {
+        //db(it);
+        
+        flagChanged = 0;
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (checkEqual(G[i].fr, G[i].sc)) {
+                G.erase(G.begin() + i);
+                flagChanged = 1;
+                break;
+            }
         } 
-    }
-    for (auto &x: g) {
-        if (checkFree(u, x.fr)) {
-            u = makeSubst(u, x.fr, x.sc);
+        if (flagChanged) continue;
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            shared_ptr < TNode > v = G[i].fr;
+            shared_ptr < TNode > u = G[i].sc;
+            if (v->checkFun() && u->checkFun()) {
+                if (v->type != u->type || v->ch.size() != u->ch.size()) {
+                    cerr << v << " != " << u << endl;
+                    cerr << "fail\n";
+                    exit(0);
+                }
+                G.erase(G.begin() + i);
+                for (int j = 0; j < (int)v->ch.size(); j++) {
+                    G.pb(mp(v->ch[j], u->ch[j]));
+                }
+                flagChanged = 1;
+                break;
+            }
+        }  
+
+        if (flagChanged) continue;
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (G[i].fr->checkFun() && G[i].sc->checkVar()) {
+                swap(G[i].fr, G[i].sc);  
+            }
         }
+
+        // check x = f(x, ... );
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
+                if (findVar(G[i].fr->type, G[i].sc)) {
+                    cerr << G[i].fr << " = " << G[i].sc << endl;
+                    cerr << "fail\n";
+                    exit(0);
+                }                    
+            }
+        }
+
+        for (int i = 0; i < (int)G.size(); i++) 
+            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
+                //db(i);
+                for (int j = 0; j < (int)G.size(); j++) {
+                    if (i == j) continue;
+                    //db2(i, j);
+                    if (findVar(G[i].fr->type, G[j].fr)) {
+                        G[j].fr = makeSubst(G[j].fr, G[i].fr->type, G[i].sc);
+                        flagChanged = 1;
+                    }
+                    if (findVar(G[i].fr->type, G[j].sc)) {
+                        G[j].sc = makeSubst(G[j].sc, G[i].fr->type, G[i].sc);
+                        flagChanged = 1;
+                    }
+                }
+            }
     }
-    g[id] = u;
 }
 
-int rec(shared_ptr < Node > v) {
+
+string rec(shared_ptr < Node > v) {
     if (v->isVar()) {
         int id;
         if (varId.count(v->type) == 0) 
             varId[v->type] = cur++;
         id = varId[v->type]; 
-        return id; 
+        return "t" + myToString(id);
     } 
-    int l = rec(v->l);
-    int r = rec(v->r);
-    int id = cur++;
-    //db2(l, r);
-    if (v->type == "ABSTR") {
-        TNode * tv = new TNode (new TNode(l), new TNode(r));
-        add(new TNode(id), tv);
-        return id;
-    }
+    string l = rec(v->l);
+    string r = rec(v->r);
+    string myId = "t" + myToString(cur++);
+
     if (v->type == "APPLY") {
-        TNode * tv = new TNode(new TNode(r), new TNode(id));
-        add(new TNode(l), tv);
-        return id;
+        shared_ptr < TNode > ll(new TNode(l));
+        shared_ptr < TNode > rr(new TNode(r));
+        shared_ptr < TNode > me(new TNode(myId));
+        shared_ptr < TNode > res(new TNode("A", {rr, me}));
+        G.pb(mp(ll, res));
+        return myId;
+    }
+    if (v->type == "ABSTR") {
+        shared_ptr < TNode > ll(new TNode(l));
+        shared_ptr < TNode > rr(new TNode(r));
+        shared_ptr < TNode > res(new TNode("A", {ll, rr}));
+        shared_ptr < TNode > me(new TNode(myId));
+        G.pb(mp(me, res));
+        return myId;
     }
     assert(false);
-
-} 
-
-string myToString (int x) {
-    char s[100];
-    sprintf(s, "%d", x);
-    return s;
-}
-
-string f(int id) {
-    if (g.count(id) == 1) {
-        return g[id]->toString();
-    }
-    return "t" + myToString(id);
 }
 
 void solve() {
     string s;
     getline(cin, s);
-    shared_ptr < Node > head = parse(s);
+    string id = rec(parse(s));
+    go();
 
-    int id = rec(head);
-
-    cout << g[id]->toString() << endl;
+    //cout << g[id]->toString() << endl;
     for (auto x: varId) {
-        cout << x.fr << ":" << f(x.sc) << endl;
+        cout << x.fr << ":" << x.sc << endl;
     }
 }
 
 int main() {
     freopen("task6.in", "r", stdin);
 
-    solve();
+    //solve();
 
     return 0;
 }

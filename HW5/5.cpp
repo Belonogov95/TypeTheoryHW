@@ -2,25 +2,25 @@
 #include "termParser.h"
 
 
-vector < pair < shared_ptr < Node >, shared_ptr < Node > > > G;
+vector < pair < shared_ptr < TNode >, shared_ptr < TNode > > > G;
 
 
 
-bool findVar(string var, shared_ptr < Node > u) {
+bool findVar(string var, shared_ptr < TNode > u) {
     if (u->type == var) return 1; 
     for (auto h: u->ch)
         if (findVar(var, h)) return 1;        
     return 0;
 }
 
-shared_ptr < Node > makeSubst(shared_ptr < Node > v, string var, shared_ptr < Node > u) {
+shared_ptr < TNode > makeSubst(shared_ptr < TNode > v, string var, shared_ptr < TNode > u) {
     //cerr << "---------------   " <<  v << " " << var << " " << u << endl;
     if (v->type == var) return u;
-    vector < shared_ptr < Node > > ch;
+    vector < shared_ptr < TNode > > ch;
     for (auto & h: v->ch) {
         ch.pb(makeSubst(h, var, u));
     }
-    return shared_ptr < Node > (new Node(v->type, ch));
+    return shared_ptr < TNode > (new TNode(v->type, ch));
 }
 
 void go() {
@@ -39,8 +39,8 @@ void go() {
         if (flagChanged) continue;
 
         for (int i = 0; i < (int)G.size(); i++) {
-            shared_ptr < Node > v = G[i].fr;
-            shared_ptr < Node > u = G[i].sc;
+            shared_ptr < TNode > v = G[i].fr;
+            shared_ptr < TNode > u = G[i].sc;
             if (v->checkFun() && u->checkFun()) {
                 if (v->type != u->type || v->ch.size() != u->ch.size()) {
                     cerr << v << " != " << u << endl;
@@ -104,10 +104,10 @@ void solve() {
         if (flag) continue;
         
         TermParser parser(s);
-        shared_ptr < Node > head = parser.parseEquation();
+        shared_ptr < TNode > head = parser.parseEquation();
         assert(head->ch.size() == 2);
-        shared_ptr < Node > v = head->ch[0]; 
-        shared_ptr < Node > u = head->ch[1];
+        shared_ptr < TNode > v = head->ch[0]; 
+        shared_ptr < TNode > u = head->ch[1];
         G.pb(mp(v, u));
     }
     go(); 

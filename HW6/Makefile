@@ -9,10 +9,13 @@ all: $(HWID)
 lambdaParser.o: $(path)lambdaParser.cpp $(path)lambdaParser.h $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
+termParser.o: termParser.cpp termParser.h $(path)main.h
+	g++ $(CXXFLAGS) -c $?
+
 $(HWID).o: $(HWID).cpp $(path)main.h
 	g++ $(CXXFLAGS) -c $?
 
-$(HWID): $(HWID).o lambdaParser.o 
+$(HWID): $(HWID).o lambdaParser.o termParser.o
 	g++ $(CXXFLAGS) -o bin/$(HWID) $(HWID).o lambdaParser.o
 
 clean:

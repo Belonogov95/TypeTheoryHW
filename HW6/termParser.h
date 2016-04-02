@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../LambdaParser/main.h"
 
 #ifndef TERM_PARSER
 #define TERM_PARSER
@@ -11,6 +11,7 @@ bool isVar(char ch);
 struct TNode {
     string type; 
     const vector < shared_ptr < TNode > > ch;
+    TNode (string type);
     TNode (string type, vector < shared_ptr < TNode > > ch);
     bool checkFun();
     bool checkVar();
@@ -21,19 +22,19 @@ ostream & operator <<(ostream & os, shared_ptr < TNode > v);
 bool checkEqual(shared_ptr < TNode > v, shared_ptr < TNode > u);
 
 
-struct LexicalAnalyzer {
+struct LexicalAnalyzerT {
     string s;
     string token;
     int cur;
 
-    LexicalAnalyzer(string s);
+    LexicalAnalyzerT(string s);
     void next();
     string curToken();
 };
 
 
 struct TermParser {
-    LexicalAnalyzer lex;
+    LexicalAnalyzerT lex;
     
     TermParser(string s);
 
