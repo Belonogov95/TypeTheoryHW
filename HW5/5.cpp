@@ -15,7 +15,7 @@ bool findVar(string var, shared_ptr < TNode > u) {
 
 shared_ptr < TNode > makeSubst(shared_ptr < TNode > v, string var, shared_ptr < TNode > u) {
     //cerr << "---------------   " <<  v << " " << var << " " << u << endl;
-    if (v->type == var) return u;
+        if (v->type == var) return u;
     vector < shared_ptr < TNode > > ch;
     for (auto & h: v->ch) {
         ch.pb(makeSubst(h, var, u));
@@ -77,8 +77,9 @@ void go() {
         }
 
         for (int i = 0; i < (int)G.size(); i++) 
-            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
-                //db(i);
+            if (G[i].fr->checkVar()) {
+                //&& G[i].sc->checkFun()) {
+                ////db(i);
                 for (int j = 0; j < (int)G.size(); j++) {
                     if (i == j) continue;
                     //db2(i, j);

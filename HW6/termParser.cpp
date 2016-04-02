@@ -59,7 +59,7 @@ LexicalAnalyzerT::LexicalAnalyzerT(string s): s(s) {
     next();
 }
 
-bool myCheck(char ch) {
+bool myCheck2(char ch) {
     return ('a' <= ch && ch <= 'z') || ('0' <= ch && ch <= '9') || ch == '`';
 }
 
@@ -85,7 +85,7 @@ void LexicalAnalyzerT::next() {
     }
     assert(islower(s[cur]));    
     int t = cur;
-    for (; cur < (int)s.size() && myCheck(s[cur]); cur++);
+    for (; cur < (int)s.size() && myCheck2(s[cur]); cur++);
 
     token = s.substr(t, cur - t);
     

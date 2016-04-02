@@ -100,6 +100,7 @@ void go() {
         for (int i = 0; i < (int)G.size(); i++) {
             if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
                 if (findVar(G[i].fr->type, G[i].sc)) {
+                    cerr << endl;
                     cerr << G[i].fr << " = " << G[i].sc << endl;
                     cerr << "fail\n";
                     exit(0);
@@ -107,9 +108,11 @@ void go() {
             }
         }
 
+        //cerr << "last part====================\n";
+        //db2(G.back().fr->checkVar(), G.back().sc->checkFun());
         for (int i = 0; i < (int)G.size(); i++) 
-            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
-                //db(i);
+            //if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
+            if (G[i].fr->checkVar()) {
                 for (int j = 0; j < (int)G.size(); j++) {
                     if (i == j) continue;
                     //db2(i, j);
@@ -128,6 +131,7 @@ void go() {
 
 
 string rec(shared_ptr < Node > v) {
+    cerr << genAns(v) << endl;
     if (v->isVar()) {
         int id;
         if (varId.count(v->type) == 0) 
@@ -139,18 +143,19 @@ string rec(shared_ptr < Node > v) {
     string r = rec(v->r);
     string myId = "t" + myToString(cur++);
 
+    //cerr << "l r myId: " << l << " " << r << " " << myId << endl;
     if (v->type == "APPLY") {
         shared_ptr < TNode > ll(new TNode(l));
         shared_ptr < TNode > rr(new TNode(r));
         shared_ptr < TNode > me(new TNode(myId));
-        shared_ptr < TNode > res(new TNode("A", {rr, me}));
+        shared_ptr < TNode > res(new TNode("a", {rr, me}));
         G.pb(mp(ll, res));
         return myId;
     }
     if (v->type == "ABSTR") {
         shared_ptr < TNode > ll(new TNode(l));
         shared_ptr < TNode > rr(new TNode(r));
-        shared_ptr < TNode > res(new TNode("A", {ll, rr}));
+        shared_ptr < TNode > res(new TNode("a", {ll, rr}));
         shared_ptr < TNode > me(new TNode(myId));
         G.pb(mp(me, res));
         return myId;
@@ -158,11 +163,34 @@ string rec(shared_ptr < Node > v) {
     assert(false);
 }
 
+string printAns(shared_ptr < TNode > v) {
+    if (v->checkVar()) {
+        return v->type;         
+    }
+    return "(" + printAns(v->ch[0]) + "->" + printAns(v->ch[1]) + ")";  
+}
+
 void solve() {
     string s;
     getline(cin, s);
-    string id = rec(parse(s));
+    shared_ptr < Node > head = parse(s);
+    string answer = rec(head);
+    cerr << genAns(head) << endl;
+    for (auto x: G) {
+        cerr << x.fr << " =  " << x.sc << endl;
+    }
+
     go();
+    db(answer);
+    for (auto x: G) {
+        cerr << x.fr << " =  " << x.sc << endl;
+    }
+    
+    for (int i = 0; i < (int)G.size(); i++) {
+        if (G[i].fr->type == answer) {
+            cerr << "result:   " << printAns(G[i].sc) << endl;
+        }
+    }
 
     //cout << g[id]->toString() << endl;
     for (auto x: varId) {
@@ -173,7 +201,8 @@ void solve() {
 int main() {
     freopen("task6.in", "r", stdin);
 
-    //solve();
+
+    solve();
 
     return 0;
 }
