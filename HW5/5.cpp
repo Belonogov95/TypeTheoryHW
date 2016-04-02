@@ -2,70 +2,97 @@
 #include "termParser.h"
 
 
-vector < pair < string, Node * > > g;
+vector < pair < shared_ptr < Node >, shared_ptr < Node > > > G;
 
 
 
-bool findVar(string var, Node * u) {
+bool findVar(string var, shared_ptr < Node > u) {
     if (u->type == var) return 1; 
     for (auto h: u->ch)
         if (findVar(var, h)) return 1;        
     return 0;
 }
 
-Node * makeSubst(Node * v, string var, Node * u) {
+shared_ptr < Node > makeSubst(shared_ptr < Node > v, string var, shared_ptr < Node > u) {
+    //cerr << "---------------   " <<  v << " " << var << " " << u << endl;
     if (v->type == var) return u;
+    vector < shared_ptr < Node > > ch;
     for (auto & h: v->ch) {
-        h = makeSubst(h, var, u);
+        ch.pb(makeSubst(h, var, u));
     }
-    return v;
+    return shared_ptr < Node > (new Node(v->type, ch));
 }
 
-void add(Node * v, Node * u) {
-    if (checkEqual(v, u)) return;
-
-
-    if (v->checkFun() && u->checkFun()) {
-        if (v->type != u->type || v->ch.size() != u->ch.size()) {
-            cout << v << " and " << u << " can not be equal\n";
-            exit(0);
-        }
-        for (int i = 0; i < (int)v->ch.size(); i++) {
-            add(v->ch[i], u->ch[i]);
-        }
-        return;
-    } 
-    if (v->checkFun() && u->checkVar()) 
-        swap(v, u);
-    string var = v->type;
-    assert(v->checkVar());
-
-    for (auto x: g) {
-        if (x.fr == var) {
-            if (checkEqual(x.sc, u)) return;
-            cout << var + "=" << u << endl;
-            cout << var + "=" << x.sc << endl;
-            cout << "fail\n";
-            exit(0);
-        }
-    } 
-
-    if (findVar(var, u)) {
-        cout << "fail\n";
-        cout << var << " has occurance in " << u << endl;
-        exit(0);
-    }
-    for (auto & x: g) {
-        if (findVar(var, x.sc)) {
-            if (findVar(x.fr, u))  {
-                cout << "fail\n";
-                cout << x.fr << " has occurance in " << u << endl;
-                exit(0);
+void go() {
+    bool flagChanged = 1;
+    for (int it = 0;flagChanged; it++) {
+        //db(it);
+        
+        flagChanged = 0;
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (checkEqual(G[i].fr, G[i].sc)) {
+                G.erase(G.begin() + i);
+                flagChanged = 1;
+                break;
             }
-            x.sc = makeSubst(x.sc, var, u);
+        } 
+        if (flagChanged) continue;
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            shared_ptr < Node > v = G[i].fr;
+            shared_ptr < Node > u = G[i].sc;
+            if (v->checkFun() && u->checkFun()) {
+                if (v->type != u->type || v->ch.size() != u->ch.size()) {
+                    cerr << v << " != " << u << endl;
+                    cerr << "fail\n";
+                    exit(0);
+                }
+                G.erase(G.begin() + i);
+                for (int j = 0; j < (int)v->ch.size(); j++) {
+                    G.pb(mp(v->ch[j], u->ch[j]));
+                }
+                flagChanged = 1;
+                break;
+            }
+        }  
+
+        if (flagChanged) continue;
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (G[i].fr->checkFun() && G[i].sc->checkVar()) {
+                swap(G[i].fr, G[i].sc);  
+            }
         }
+
+        // check x = f(x, ... );
+
+        for (int i = 0; i < (int)G.size(); i++) {
+            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
+                if (findVar(G[i].fr->type, G[i].sc)) {
+                    cerr << G[i].fr << " = " << G[i].sc << endl;
+                    cerr << "fail\n";
+                    exit(0);
+                }                    
+            }
+        }
+
+        for (int i = 0; i < (int)G.size(); i++) 
+            if (G[i].fr->checkVar() && G[i].sc->checkFun()) {
+                //db(i);
+                for (int j = 0; j < (int)G.size(); j++) {
+                    if (i == j) continue;
+                    //db2(i, j);
+                    if (findVar(G[i].fr->type, G[j].fr)) {
+                        G[j].fr = makeSubst(G[j].fr, G[i].fr->type, G[i].sc);
+                        flagChanged = 1;
+                    }
+                    if (findVar(G[i].fr->type, G[j].sc)) {
+                        G[j].sc = makeSubst(G[j].sc, G[i].fr->type, G[i].sc);
+                        flagChanged = 1;
+                    }
+                }
+            }
     }
-    g.pb(mp(var, u));
 }
 
 void solve() {
@@ -77,19 +104,17 @@ void solve() {
         if (flag) continue;
         
         TermParser parser(s);
-        Node * head = parser.parseEquation();
+        shared_ptr < Node > head = parser.parseEquation();
         assert(head->ch.size() == 2);
-        Node * v = head->ch[0]; 
-        Node * u = head->ch[1];
-        //db("before add");
-        add(v, u);
+        shared_ptr < Node > v = head->ch[0]; 
+        shared_ptr < Node > u = head->ch[1];
+        G.pb(mp(v, u));
     }
+    go(); 
 
-    for (auto x: g) {
+    for (auto x: G) {
         cout << x.fr << "=" << x.sc << endl;
     }
-
-
 }
 
 

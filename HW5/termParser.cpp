@@ -1,7 +1,7 @@
 #include "termParser.h"
 
 
-Node::Node (string type, vector < Node * > ch): type(type), ch(ch) { }
+Node::Node (string type, vector < shared_ptr < Node > > ch): type(type), ch(ch) { }
 
 
 bool Node::checkFun() {
@@ -12,7 +12,7 @@ bool Node::checkVar() {
     return isVar(type[0]);
 }
 
-bool checkEqual(Node * v, Node * u) {
+bool checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
     if (v->type != u->type || v->ch.size() != u->ch.size()) return 0;
     for (int i = 0; i < (int)v->ch.size(); i++)
         if (!checkEqual(v->ch[i], u->ch[i])) return 0;
@@ -35,7 +35,7 @@ bool checkEqual(Node * v, Node * u) {
     //}
 //}
 
-ostream & operator <<(ostream & os, Node * v) {
+ostream & operator <<(ostream & os, shared_ptr < Node > v) {
     if (isFun(v->type[0])) {
         os << v->type << "(" << v->ch[0];
         for (int i = 1; i < (int)v->ch.size(); i++) {
@@ -93,18 +93,18 @@ string LexicalAnalyzer::curToken() {
 }
 
 TermParser::TermParser(string s): lex(s) { }
-Node * TermParser::parseEquation() {
+shared_ptr < Node > TermParser::parseEquation() {
     //db(lex.curToken());
-    Node * v = parseTerm();
+    shared_ptr < Node > v = parseTerm();
     //db(lex.curToken());
     assert(lex.curToken() == "=");
     lex.next();
     //db(lex.curToken());
-    Node * u = parseTerm();
-    return new Node("E", vector < Node * > {v, u});
+    shared_ptr < Node > u = parseTerm();
+    return shared_ptr < Node > (new Node("E", vector < shared_ptr < Node > > {v, u}));
 }
 
-Node * TermParser::parseTerm() {
+shared_ptr < Node > TermParser::parseTerm() {
     if (isVar(lex.curToken()[0])) {
         return parseVar();
     }
@@ -113,14 +113,14 @@ Node * TermParser::parseTerm() {
     return parseFun();
 }
 
-Node * TermParser::parseFun() {
+shared_ptr < Node > TermParser::parseFun() {
     string s = lex.curToken();
     //db(lex.curToken());
     lex.next();
     //db(lex.curToken());
     assert(lex.curToken() == "(");    
     lex.next();
-    vector < Node * > ch;
+    vector < shared_ptr < Node > > ch;
     ch.pb(parseTerm());
     for (; lex.curToken() == ","; ) {
         lex.next();
@@ -128,13 +128,13 @@ Node * TermParser::parseFun() {
     }
     assert(lex.curToken() == ")");
     lex.next();
-    return new Node(s, ch);
+    return shared_ptr < Node > (new Node(s, ch));
 }
 
-Node * TermParser::parseVar() {
+shared_ptr < Node > TermParser::parseVar() {
     string s = lex.curToken();
     lex.next();
-    return new Node(s, vector < Node * >());
+    return shared_ptr < Node > (new Node(s, vector < shared_ptr < Node > >()));
 }
 
 

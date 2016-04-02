@@ -23,17 +23,17 @@ void ret() {
     exit(0);
 }
 
-bool checkEqual(TNode * v, TNode * u) {
-    if ((v == NULL) != (u != NULL)) return 0;
-    assert(v != NULL && u != NULL);
-    if (v->id != u->id) return 0;
-    if (v->l != NULL && !checkEqual(v->l, u->l))
-        return 0;
-    if (v->r != NULL && !checkEqual(v->r, u->r))
-        return 0;
+//bool checkEqual(TNode * v, TNode * u) {
+    //if ((v == NULL) != (u != NULL)) return 0;
+    //assert(v != NULL && u != NULL);
+    //if (v->id != u->id) return 0;
+    //if (v->l != NULL && !checkEqual(v->l, u->l))
+        //return 0;
+    //if (v->r != NULL && !checkEqual(v->r, u->r))
+        //return 0;
 
-    return 1;
-}
+    //return 1;
+//}
 
 bool checkFree(TNode * v, int id) {
     if (v == NULL) return 0;
@@ -51,18 +51,22 @@ TNode * makeSubst(TNode * v, int id, TNode * u) {
 }
 
 void add(TNode * v, TNode * u) {
-    //db2(v->id, u->id);
+    db2(v->toString(), u->toString());
     if (v->id == -1 && u-> id == -1) {
         add(v->l, u->l);
         add(v->r, u->r);
         return;
     }
+    if (v->id == u->id && v->id != -1) 
+        return; 
     if (v->id < u->id) swap(v, u);
     int id = v->id;
     assert(id >= 0);
 
-    if (checkFree(u, id))
+    if (checkFree(u, id)) {
+        cerr << u->toString() << endl;
         ret();
+    }
     
     if (g.count(id) == 1) {
         add(g[id], u);
@@ -71,6 +75,7 @@ void add(TNode * v, TNode * u) {
     for (auto & x: g) {
         if (checkFree(x.sc, id)) {
             if (checkFree(u, x.fr)) {
+                db("here");
                 ret();
             } 
             x.sc = makeSubst(x.sc, id, u);
@@ -85,7 +90,7 @@ void add(TNode * v, TNode * u) {
 }
 
 int rec(shared_ptr < Node > v) {
-    if (islower(v->type[0])) {
+    if (v->isVar()) {
         int id;
         if (varId.count(v->type) == 0) 
             varId[v->type] = cur++;
@@ -134,9 +139,6 @@ void solve() {
     for (auto x: varId) {
         cout << x.fr << ":" << f(x.sc) << endl;
     }
-
-
-    
 }
 
 int main() {

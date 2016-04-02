@@ -10,17 +10,15 @@ bool isVar(char ch);
 
 struct Node {
     string type; 
-    vector < Node * > ch;
-    Node (string type, vector < Node * > ch);
-    //void printTerm();
+    const vector < shared_ptr < Node > > ch;
+    Node (string type, vector < shared_ptr < Node > > ch);
     bool checkFun();
-    //bool checkFun();
     bool checkVar();
 };
 
-ostream & operator <<(ostream & os, Node * v);
+ostream & operator <<(ostream & os, shared_ptr < Node > v);
 
-bool checkEqual(Node * v, Node * u);
+bool checkEqual(shared_ptr < Node > v, shared_ptr < Node > u);
 
 
 struct LexicalAnalyzer {
@@ -39,10 +37,10 @@ struct TermParser {
     
     TermParser(string s);
 
-    Node * parseEquation();
-    Node * parseTerm();
-    Node * parseFun();
-    Node * parseVar();
+    shared_ptr < Node > parseEquation();
+    shared_ptr < Node > parseTerm();
+    shared_ptr < Node > parseFun();
+    shared_ptr < Node > parseVar();
 
 };
 
