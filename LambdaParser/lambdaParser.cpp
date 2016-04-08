@@ -116,16 +116,6 @@ shared_ptr < Node > Node::getL() { return l; }
 
 shared_ptr < Node > Node::getR() { return r; } 
 
-//void Node::setL(shared_ptr < Node > v) {
-    //l = v;
-    //updateHash();
-//}
-
-//void Node::setR(shared_ptr < Node > v) {
-    //r = v;
-    //updateHash();
-//}
-
 string LexicalAnalyzer::curToken() {
     return token;
 }
@@ -199,7 +189,6 @@ shared_ptr < Node > LambdaParser::parseCondition() {
 
 
 
-// tools
 set < string > genFV(shared_ptr < Node > v) {
     if (islower(v->type[0])) {
         set < string > q;
@@ -220,29 +209,8 @@ set < string > genFV(shared_ptr < Node > v) {
     assert(false);
 }
 
-//bool checkFV(shared_ptr < Node > v, string var) {
-    //if (islower(v->type[0]))
-        //return v->type == var;
-    //if (v->type == "APPLY") {
-        //return checkFV(v->getL(), var) || checkFV(v->getR(), var);
-    //}
-    //if (v->type == "ABSTR") {
-        //if (v->getL()->type == var) return 0;
-        //return checkFV(v->getR(), var);
-    //}
-    //assert(false);
-//}
 
 int cntN = 0;
-
-//shared_ptr < Node > createCopy(shared_ptr < Node > v) {
-    //cntN++;
-    //if (cntN % 500000 == 0)
-        //db(cntN);
-    //if (islower(v->type[0]))  
-        //return shared_ptr < Node > (new Node(v->type));
-    //return shared_ptr < Node > (new Node(v->type, createCopy(v->getL()), createCopy(v->getR())));
-//}
 
 void checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
     assert(v != NULL && u != NULL);
@@ -252,12 +220,8 @@ void checkEqual(shared_ptr < Node > v, shared_ptr < Node > u) {
 
 }
 
-//int cntSub;
 
 shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < Node > u, int & cnt, FreeVarGenerator & gen) {
-    //cntSub++;
-    //if (cntSub % 1000000 == 0)
-        //db(cntSub);
 
     if (islower(v->type[0])) {
         if (v->type == name) {
@@ -266,7 +230,6 @@ shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < N
         }
         return v;
     }
-    //db(v->type);
     if (v->type == "APPLY") {
         int cc = cnt;
         auto ll = makeSubst(v->getL(), name, u, cnt, gen);
@@ -279,28 +242,17 @@ shared_ptr < Node > makeSubst(shared_ptr < Node > v, string name, shared_ptr < N
     if (v->type == "ABSTR") {
         if (v->getL()->type == name)
             return v;
-        //auto fvU = genFV(u);
-        //bool checkFVy = check
 
         if (!(islower(v->getL()->type[0]))) {
             db(v->getL()->type);
         }
         assert(islower(v->getL()->type[0]));
         string y = v->getL()->type;
-        //if (checkFV(u, y)) {
-        //if (false) {
         if (u->freeCh.count(y) == 1) {
-            //assert(false);
             string z = gen.next();
-            //v->getL()->type = z;
             int cc = 0;
-            //shared_ptr < Node > gg;
             v = shared_ptr < Node > (new Node(v->type, shared_ptr < Node > (new Node(z)), makeSubst(v->getR(), y, shared_ptr < Node > (new Node(z)), cc, gen)));
             v = shared_ptr < Node > (new Node(v->type, v->getL(), makeSubst(v->getR(), name, u, cnt, gen)));
-            //assert(cnt > 0);
-            //db("b_2");
-            //v = shared_ptr < Node > (new Node(v->type, ll, rr));
-            //db("a_2");
         }
         else {
             int cc = cnt;
@@ -362,7 +314,6 @@ string FreeVarGenerator::next() {
     for (; q.count(cur) == 1; cur++);
     q.insert(cur);
     string s = code(cur);
-    //db(s);
     return s;
 }
 

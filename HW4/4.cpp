@@ -9,6 +9,8 @@ map < ull, shared_ptr < Node > > normMem, headMem;
 
 const int MAX_LEN = 10000000;
 int cntDone;
+int cntApp1 = 0;
+int cntApp2 = 0;
 
 
 shared_ptr < Node > normalForm(shared_ptr < Node > v);
@@ -25,6 +27,7 @@ shared_ptr < Node > headForm(shared_ptr < Node > v) {
         if (v->getL()->isAbstr()) {
             int cc = 0;
             v = makeSubst(v->getL()->getR(), v->getL()->getL()->type, v->getR(), cc, gen);
+            cntApp1++;
             v = headForm(v);
         }
         else {
@@ -55,6 +58,7 @@ shared_ptr < Node > normalForm(shared_ptr < Node > v) {
         else {
             int cc = 0;
             v = makeSubst(v->getL()->getR(), v->getL()->getL()->type, v->getR(), cc, gen);
+            cntApp2++;
             v = normalForm(v);
         }
     }
@@ -143,6 +147,7 @@ void solve() {
     assert(ss == genAns(normalForm(parse(genAns(head)))));
     db("OK");
 
+    db2(cntApp1, cntApp2);
     cout << genAns(head) << endl;
 
 }
